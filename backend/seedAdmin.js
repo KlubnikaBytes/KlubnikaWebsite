@@ -13,7 +13,7 @@ const seedAdmin = async () => {
         if (ceo) {
             console.log('CEO already exists. Updating details...');
             ceo.employeeId = 'KB_CEO';
-            ceo.email = 'msitcselab@gmail.com';
+            ceo.email = 'nguria7@gmail.com';
             ceo.name = 'Klubnika CEO';
             ceo.status = 'Active';
             await ceo.save();
@@ -22,12 +22,12 @@ const seedAdmin = async () => {
             ceo = await Employee.create({
                 employeeId: 'KB_CEO',
                 name: 'Klubnika CEO',
-                email: 'msitcselab@gmail.com',
+                email: 'nguria7@gmail.com',
                 role: 'CEO',
                 status: 'Active'
             });
         }
-        console.log('✅ CEO Configured! Employee ID: KB_CEO, Email: msitcselab@gmail.com');
+        console.log('✅ CEO Configured! Employee ID: KB_CEO, Email: nguria7@gmail.com');
 
         // Note: HR will be created via the CEO from the frontend dashboard
         // I won't create them here so you can test the flow!

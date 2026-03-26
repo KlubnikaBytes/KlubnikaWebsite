@@ -1,0 +1,338 @@
+/* ══════════════════════════════
+   PREMIUM MODER FOOTER STYLING
+   ══════════════════════════════ */
+
+.kb-footer {
+    background-color: #0b0f19;
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Optional subtle background glow effect */
+.kb-footer::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, rgba(11, 15, 25, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+/* --- Top CTA Section --- */
+.kb-footer-top {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 60px 0;
+    background: linear-gradient(90deg, rgba(11, 15, 25, 1) 0%, rgba(15, 23, 42, 1) 100%);
+}
+
+.kb-footer-top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.kb-footer-cta-text h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+    letter-spacing: -0.01em;
+}
+
+.kb-footer-cta-text p {
+    font-size: 1rem;
+    color: #94a3b8;
+    margin: 0;
+}
+
+.kb-footer-cta-form form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.kb-footer-cta-form input {
+    flex: 1;
+    padding: 14px 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.kb-footer-cta-form input:focus {
+    border-color: #6366f1;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.kb-footer-cta-form button {
+    padding: 14px 28px;
+    border-radius: 8px;
+    border: none;
+    background: #6366f1;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.kb-footer-cta-form button:hover {
+    background: #4f46e5;
+}
+
+/* --- Main Footer Content --- */
+.kb-footer-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 50px;
+    padding: 80px 5%;
+}
+
+.kb-footer-col h4 {
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 25px 0;
+    letter-spacing: 0.02em;
+}
+
+/* Brand Column */
+.kb-footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-decoration: none;
+    margin-bottom: 25px;
+    letter-spacing: -0.02em;
+}
+
+.kb-logo-icon {
+    font-size: 1.8rem;
+}
+
+.kb-footer-desc {
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    max-width: 320px;
+}
+
+.kb-social-links {
+    display: flex;
+    gap: 16px;
+}
+
+.kb-social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.kb-social-links a svg {
+    width: 18px;
+    height: 18px;
+}
+
+.kb-social-links a:hover {
+    background: #6366f1;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.6);
+}
+
+/* Links Columns */
+.kb-footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.kb-footer-col ul li {
+    margin-bottom: 16px;
+}
+
+.kb-footer-col ul li a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.kb-footer-col ul li a:hover {
+    color: #6366f1;
+    transform: translateX(4px);
+}
+
+/* Contact Column */
+.kb-contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px !important;
+}
+
+.kb-contact-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: #6366f1;
+    margin-top: 2px;
+}
+
+.kb-contact-list span,
+.kb-contact-list a {
+    color: #94a3b8;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.kb-contact-list a:hover {
+    color: #ffffff;
+    transform: none !important;
+}
+
+/* --- Bottom Bar --- */
+.kb-footer-bottom {
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 25px 0;
+}
+
+.kb-footer-bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.kb-footer-bottom-inner p {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.kb-footer-legal {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.kb-footer-legal a {
+    color: #64748b;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.kb-footer-legal a:hover {
+    color: #cbd5e1;
+}
+
+.kb-separator {
+    color: #334155;
+    font-size: 0.8rem;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+    .kb-footer-main {
+        grid-template-columns: 1.5fr 1fr 1fr;
+        row-gap: 60px;
+    }
+    
+    .kb-footer-main .contact-col {
+        grid-column: 1 / -1;
+    }
+    
+    .kb-footer-top-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .kb-footer-cta-form form {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .kb-footer-main {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .kb-footer-main .brand-col {
+        grid-column: 1 / -1;
+    }
+    
+    .kb-footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .kb-footer-legal {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .kb-footer-main {
+        grid-template-columns: 1fr;
+        padding: 60px 5%;
+    }
+    
+    .kb-footer-top {
+        padding: 40px 0;
+    }
+    
+    .kb-footer-cta-form form {
+        flex-direction: column;
+    }
+    
+    .kb-footer-cta-form button {
+        width: 100%;
+    }
+    
+    .kb-footer-legal {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .kb-separator {
+        display: none;
+    }
+}

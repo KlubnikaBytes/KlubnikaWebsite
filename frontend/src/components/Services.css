@@ -1,0 +1,188 @@
+:root {
+    --bg-white: #ffffff;
+    --text-dark: #0f172a;
+    --text-slate: #475569;
+    --slate-200: #e2e8f0;
+    --primary-blue: #2563eb;
+}
+
+.services-section-v2 {
+    padding: clamp(80px, 12vw, 140px) 0;
+    background-color: var(--bg-white);
+    font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.services-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header Section */
+.services-header-v2 {
+    text-align: center;
+    margin-bottom: clamp(50px, 8vw, 80px);
+}
+
+.corp-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: #eff6ff;
+    color: var(--primary-blue);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-radius: 100px;
+    margin-bottom: 20px;
+}
+
+.services-title-v2 {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 850;
+    color: var(--text-dark);
+    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.services-title-v2 span {
+    color: #94a3b8;
+}
+
+.services-desc-v2 {
+    font-size: 1.15rem;
+    color: var(--text-slate);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Grid Configuration */
+.services-grid-v2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+/* Premium Card Styling */
+.premium-service-card {
+    background: #fff;
+    padding: 48px 40px;
+    border: 1px solid var(--slate-200);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.premium-service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--brand-color);
+    box-shadow: 0 30px 60px -12px rgba(15, 23, 42, 0.12);
+}
+
+.card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.service-index {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #cbd5e1;
+    letter-spacing: 0.1em;
+}
+
+.service-icon-box {
+    width: 56px;
+    height: 56px;
+    background: #f8fafc;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-color);
+    transition: all 0.4s ease;
+}
+
+.premium-service-card:hover .service-icon-box {
+    background: var(--brand-color);
+    color: #fff;
+    transform: scale(1.1) rotate(4deg);
+}
+
+.service-heading-v2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.service-text-v2 {
+    color: var(--text-slate);
+    line-height: 1.6;
+    font-size: 1.05rem;
+    margin-bottom: 40px;
+    flex: 1;
+}
+
+.card-action-v2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.action-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.action-arrow {
+    color: #94a3b8;
+    transition: all 0.3s ease;
+}
+
+.premium-service-card:hover .action-label {
+    color: var(--brand-color);
+}
+
+.premium-service-card:hover .action-arrow {
+    color: var(--brand-color);
+    transform: translateX(6px);
+}
+
+/* Footer Action */
+.services-action-v2 {
+    text-align: center;
+}
+
+.btn-full-services {
+    display: inline-block;
+    padding: 18px 48px;
+    background: var(--text-dark);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.btn-full-services:hover {
+    background: var(--primary-blue);
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+    .premium-service-card {
+        padding: 32px;
+    }
+}

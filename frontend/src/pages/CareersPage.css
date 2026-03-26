@@ -1,0 +1,140 @@
+.careers-page {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    background-color: #f8fafc;
+    /* Very light slate background */
+    min-height: 80vh;
+}
+
+.careers-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.careers-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.careers-header h1 {
+    font-size: 2.5rem;
+    color: #0f172a;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.careers-header p {
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.job-listing-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 3rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f1f5f9;
+}
+
+.job-header {
+    margin-bottom: 1.5rem;
+}
+
+.job-header h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 0.8rem;
+}
+
+.job-meta {
+    display: flex;
+    gap: 1.5rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.job-description {
+    color: #475569;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+}
+
+.job-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.details-column h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 1.5rem;
+}
+
+.details-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.details-column ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+/* Custom bullet points resembling the reference */
+.details-column ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #4285F4;
+}
+
+.apply-section {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btn-apply {
+    background-color: #0f172a;
+    color: white;
+    padding: 0.8rem 2.5rem;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 1.05rem;
+}
+
+.btn-apply:hover {
+    background-color: #1e293b;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .job-listing-card {
+        padding: 2rem;
+    }
+
+    .job-details-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}

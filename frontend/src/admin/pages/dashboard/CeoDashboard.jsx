@@ -101,21 +101,33 @@ const CeoDashboard = () => {
             {/* KPI Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                 {[
-                    { label: 'Total Team Size', value: stats?.totalEmployees || 0, color: 'from-blue-600 to-cyan-500', shadow: 'shadow-blue-500/20', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' },
-                    { label: 'Active Personnel', value: stats?.activeEmployees || 0, color: 'from-emerald-500 to-teal-400', shadow: 'shadow-emerald-500/20', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
-                    { label: 'Pending Referrals', value: stats?.totalReferrals || 0, color: 'from-indigo-600 to-purple-500', shadow: 'shadow-indigo-500/20', icon: 'M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z' },
-                    { label: 'Published Pages', value: stats?.publishedPages || 0, color: 'from-rose-500 to-pink-500', shadow: 'shadow-rose-500/20', icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z' },
+                    { label: 'Total Team Size', value: stats?.totalEmployees || 0, iconColor: 'text-indigo-600', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' },
+                    { label: 'Active Personnel', value: stats?.activeEmployees || 0, iconColor: 'text-emerald-600', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
+                    { label: 'Pending Referrals', value: stats?.totalReferrals || 0, iconColor: 'text-amber-500', icon: 'M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z' },
+                    { label: 'Published Pages', value: stats?.publishedPages || 0, iconColor: 'text-rose-500', icon: 'M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z' },
                 ].map((stat, i) => (
-                    <div key={i} className={`relative overflow-hidden p-6 sm:p-7 rounded-3xl shadow-lg border border-white/10 bg-gradient-to-br ${stat.color} ${stat.shadow} text-white group hover:-translate-y-1.5 transition-all duration-300`}>
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-white/20 transition-colors"></div>
-                        <div className="absolute bottom-0 right-0 p-4 opacity-20 group-hover:opacity-30 group-hover:scale-110 transition-all duration-500">
-                             <svg className="w-20 h-20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={stat.icon}/></svg>
+                    <div key={i} className="relative overflow-hidden p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-200 bg-white group hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                        <div className={`absolute -bottom-4 -right-4 opacity-[0.04] group-hover:opacity-[0.08] group-hover:scale-110 transition-all duration-500 ${stat.iconColor}`}>
+                             <svg className="w-32 h-32" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={stat.icon}/></svg>
                         </div>
-                        <p className="text-xs sm:text-sm font-bold uppercase tracking-widest opacity-90 mb-3 relative z-10">{stat.label}</p>
-                        <p className="text-4xl sm:text-5xl font-extrabold tracking-tight relative z-10">{stat.value}</p>
-                        <div className="mt-5 flex items-center text-xs sm:text-sm bg-white/10 inline-flex px-3 py-1.5 rounded-full font-bold relative z-10 backdrop-blur-md">
-                            <svg className="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-                            Up from last month
+                        
+                        <div className="relative z-10 flex flex-col justify-between h-full">
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-widest">{stat.label}</h3>
+                                <div className={`p-2 rounded-xl bg-slate-50 border border-slate-100 shadow-sm ${stat.iconColor}`}>
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={stat.icon}/></svg>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <p className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">{stat.value}</p>
+                                <div className="mt-3 flex items-center text-[11px] font-bold text-emerald-600">
+                                    <span className="flex items-center bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-100/50">
+                                        <svg className="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                                        Up from last month
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 ))}

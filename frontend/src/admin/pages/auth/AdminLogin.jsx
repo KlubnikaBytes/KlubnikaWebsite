@@ -58,6 +58,11 @@ const AdminLogin = () => {
                 setTokenId(data.tokenId);
                 setStep('SETUP_PASSWORD');
                 setSuccessMsg('Token verified. Please set your new password.');
+            } else if (data.step === 'REQUIRE_PASSWORD_CHANGE') {
+                setResetToken(data.resetToken);
+                setCeoEmail(data.user?.email || '');
+                setStep('REQUIRE_PASSWORD_CHANGE');
+                setSuccessMsg('Authentication successful. Policy requires you to set a permanent password.');
             } else if (data.step === 'LOGIN_SUCCESS') {
                 localStorage.setItem('adminToken', data.token);
                 localStorage.setItem('adminUser', JSON.stringify(data.user));
@@ -126,6 +131,93 @@ const AdminLogin = () => {
             localStorage.setItem('adminUser', JSON.stringify(data.user));
             navigate('/admin/dashboard');
 
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleChangeInitialPassword = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        if (newPassword !== confirmPassword) {
+            setError('Passwords do not match');
+            setLoading(false);
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/admin/auth/change-initial-password', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${resetToken}`
+                },
+                body: JSON.stringify({ newPassword })
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || 'Password change failed');
+
+            localStorage.setItem('adminToken', data.token);
+            localStorage.setItem('adminUser', JSON.stringify(data.user));
+            navigate('/admin/dashboard');
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleForgotPasswordReq = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+        try {
+            const response = await fetch('/api/admin/auth/forgot-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ employeeId })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || 'Failed to request reset');
+            
+            setCeoEmail(data.email);
+            setEmployeeId(data.employeeId);
+            setStep('FORGOT_PASSWORD_OTP');
+            setSuccessMsg('Reset OTP has been sent to your email.');
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleResetPassword = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+        if (newPassword !== confirmPassword) {
+            setError('Passwords do not match');
+            setLoading(false); return;
+        }
+        try {
+            const response = await fetch('/api/admin/auth/reset-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ employeeId, otpCode, newPassword })
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || 'Failed to reset password');
+            
+            setStep('INITIAL');
+            setSuccessMsg('Password has been reset successfully. You can now log in.');
+            setOtpCode('');
+            setNewPassword('');
+            setConfirmPassword('');
         } catch (err) {
             setError(err.message);
         } finally {
@@ -231,6 +323,7 @@ const AdminLogin = () => {
                                 <div className="space-y-1.5">
                                     <div className="flex justify-between items-center">
                                         <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest">Access Key</label>
+                                        <button type="button" onClick={() => { setStep('FORGOT_PASSWORD_EMAIL'); setError(''); setSuccessMsg(''); }} className="text-[11px] font-bold text-indigo-400 hover:text-indigo-300 transition-colors">Forgot Password?</button>
                                     </div>
                                     <div className="relative group">
                                         <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500 group-focus-within:text-indigo-400 transition-colors">
@@ -341,6 +434,67 @@ const AdminLogin = () => {
                                 >
                                     {loading ? 'Saving...' : 'Complete Setup & Enter Portal'}
                                 </button>
+                            </form>
+                        )}
+
+                        {step === 'REQUIRE_PASSWORD_CHANGE' && (
+                            <form className="space-y-5 animate-in fade-in" onSubmit={handleChangeInitialPassword}>
+                                <div className="text-center mb-6">
+                                    <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-blue-500/30">
+                                        <svg className="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                    </div>
+                                    <h3 className="text-white font-bold text-lg">Update Required</h3>
+                                    <p className="text-sm text-slate-400 mt-1">Please change your temporary initial password to a permanent one.</p>
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest">New Password</label>
+                                    <input type="password" required value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className="block w-full px-4 py-3.5 bg-slate-900 border border-slate-700/60 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all font-medium" />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest">Confirm Password</label>
+                                    <input type="password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className="block w-full px-4 py-3.5 bg-slate-900 border border-slate-700/60 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all font-medium" />
+                                </div>
+                                <button type="submit" disabled={loading} className="w-full mt-6 py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 text-sm font-bold text-white bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500/30 transition-all disabled:opacity-50">
+                                    {loading ? 'Saving...' : 'Update Password & Enter Portal'}
+                                </button>
+                            </form>
+                        )}
+
+                        {step === 'FORGOT_PASSWORD_EMAIL' && (
+                            <form className="space-y-5 animate-in fade-in" onSubmit={handleForgotPasswordReq}>
+                                <div className="text-center mb-6">
+                                    <h3 className="text-white font-bold text-lg">Password Recovery</h3>
+                                    <p className="text-sm text-slate-400 mt-1">Enter your Employee ID or Email to receive an OTP.</p>
+                                </div>
+                                <div className="space-y-1.5">
+                                    <input type="text" required value={employeeId} onChange={(e) => setEmployeeId(e.target.value)} placeholder="e.g. KB001 or name@domain.com" className="block w-full px-4 py-3.5 bg-slate-900 border border-slate-700/60 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all font-medium" />
+                                </div>
+                                <div className="flex gap-3 mt-6">
+                                    <button type="button" onClick={() => { setStep('INITIAL'); setError(''); setSuccessMsg(''); }} className="w-1/3 py-3.5 px-4 rounded-xl text-sm font-bold text-slate-300 bg-slate-700/50 hover:bg-slate-700 border border-slate-600/50 transition-colors">Cancel</button>
+                                    <button type="submit" disabled={loading} className="w-2/3 flex justify-center items-center py-3.5 px-4 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 disabled:opacity-50 transition-all">{loading ? 'Sending...' : 'Send Recovery OTP'}</button>
+                                </div>
+                            </form>
+                        )}
+
+                        {step === 'FORGOT_PASSWORD_OTP' && (
+                            <form className="space-y-5 animate-in fade-in" onSubmit={handleResetPassword}>
+                                <div className="text-center mb-6">
+                                    <h3 className="text-white font-bold text-lg">Reset Password</h3>
+                                    <p className="text-sm text-slate-400 mt-1">Enter the 6-digit OTP sent to <span className="text-indigo-400 font-medium">{ceoEmail}</span> and your new password.</p>
+                                </div>
+                                <div className="space-y-1.5">
+                                    <input type="text" required value={otpCode} onChange={(e) => setOtpCode(e.target.value)} placeholder="000000" className="block w-full text-center tracking-[1em] text-xl py-3.5 bg-slate-900 border border-slate-700/60 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all font-mono font-bold" />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <input type="password" required value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="New Password" className="block w-full px-4 py-3.5 bg-slate-900 border border-slate-700/60 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all font-medium" />
+                                </div>
+                                <div className="space-y-1.5">
+                                    <input type="password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm New Password" className="block w-full px-4 py-3.5 bg-slate-900 border border-slate-700/60 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all font-medium" />
+                                </div>
+                                <div className="flex gap-3 mt-6">
+                                    <button type="button" onClick={() => { setStep('FORGOT_PASSWORD_EMAIL'); setError(''); setSuccessMsg(''); }} className="w-1/3 py-3.5 px-4 rounded-xl text-sm font-bold text-slate-300 bg-slate-700/50 hover:bg-slate-700 border border-slate-600/50 transition-colors">Back</button>
+                                    <button type="submit" disabled={loading} className="w-2/3 flex justify-center items-center py-3.5 px-4 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/30 disabled:opacity-50 transition-all">{loading ? 'Resetting...' : 'Reset Password'}</button>
+                                </div>
                             </form>
                         )}
                     </div>

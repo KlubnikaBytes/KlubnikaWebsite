@@ -1,6 +1,7 @@
 const Employee = require('../../models/admin/Employee');
 const ActivityLog = require('../../models/admin/ActivityLog');
 const Department = require('../../models/admin/Department');
+const bcrypt = require('bcryptjs');
 
 // Get all employees (HR & CEO only)
 const getEmployees = async (req, res) => {
@@ -16,7 +17,7 @@ const getEmployees = async (req, res) => {
 // Create a new employee (HR & CEO only)
 const createEmployee = async (req, res) => {
     try {
-        const { employeeId, name, email, role, designation, department } = req.body;
+        const { employeeId, name, email, role, designation, department, password } = req.body;
         
         // HR cannot create CEO or other HR (unless CEO)
         if (req.employee.role === 'HR' && (role === 'CEO' || role === 'HR')) {
@@ -28,8 +29,22 @@ const createEmployee = async (req, res) => {
              return res.status(400).json({ message: 'Employee with this ID or Email already exists' });
         }
 
+        let plainPwd = null;
+        if (password) {
+            plainPwd = password; // Store exact plain text password as requested
+        }
+
         const newEmployee = await Employee.create({
-            employeeId, name, email, role, designation, department, status: 'Onboarding'
+            employeeId, 
+            name, 
+            email, 
+            role, 
+            designation, 
+            department, 
+            password: plainPwd,
+            plainPassword: plainPwd, // Save plain text in DB for visibility
+            status: password ? 'Active' : 'Onboarding',
+            requiresPasswordChange: true
         });
 
         await ActivityLog.create({

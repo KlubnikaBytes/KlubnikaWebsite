@@ -12,6 +12,9 @@ import EmployeeProfile from './pages/profile/EmployeeProfile';
 import MyDocuments from './pages/documents/MyDocuments';
 import DocumentVerification from './pages/hr/DocumentVerification';
 import ApplicationsList from './pages/hr/ApplicationsList';
+import AttendanceManager from './pages/hr/AttendanceManager';
+import PerformanceReview from './pages/hr/PerformanceReview';
+import JobPostingsManager from './pages/hr/JobPostingsManager';
 
 const Unauthorized = () => <div className="p-6 text-red-500">Access Denied</div>;
 
@@ -56,6 +59,9 @@ const AdminRouter = () => {
                 {/* Dashboards based on role */}
                 <Route path="dashboard" element={<ProtectedRoute allowedRoles={['CEO']}><CeoDashboard /></ProtectedRoute>} />
                 <Route path="hr/dashboard" element={<ProtectedRoute allowedRoles={['CEO', 'HR']}><EmployeeManager /></ProtectedRoute>} />
+                <Route path="hr/attendance" element={<ProtectedRoute allowedRoles={['CEO', 'HR']}><AttendanceManager /></ProtectedRoute>} />
+                <Route path="hr/jobs" element={<ProtectedRoute allowedRoles={['CEO', 'HR']}><JobPostingsManager /></ProtectedRoute>} />
+                <Route path="hr/performance" element={<ProtectedRoute allowedRoles={['CEO', 'HR']}><PerformanceReview /></ProtectedRoute>} />
                 <Route path="marketing/dashboard" element={<ProtectedRoute allowedRoles={['CEO', 'Digital Marketing Manager']}><PageManager /></ProtectedRoute>} />
                 <Route path="employee/dashboard" element={<ProtectedRoute allowedRoles={['Employee']}><EmployeeDashboard /></ProtectedRoute>} />
                 <Route path="leaves" element={<ProtectedRoute allowedRoles={['CEO', 'HR', 'Employee']}><LeaveDashboard /></ProtectedRoute>} />

@@ -9,7 +9,7 @@ const seedAdmin = async () => {
 
         // Check if CEO already exists
         let ceo = await Employee.findOne({ role: 'CEO' });
-        
+
         if (ceo) {
             console.log('CEO already exists. Updating details...');
             ceo.employeeId = 'KB_CEO';

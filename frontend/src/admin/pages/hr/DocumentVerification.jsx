@@ -1,4 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
+import {
+  Mail,
+  ClipboardList,
+  FileSignature,
+  File,
+  Coins,
+  TrendingUp,
+  AlertTriangle,
+  Bookmark,
+  Briefcase,
+  FolderOpen,
+  Upload,
+  Inbox,
+  FileText,
+  Image as ImageIcon,
+  Building,
+  Eye,
+  CheckCircle2,
+  XCircle,
+  Download,
+  Clock,
+  Info
+} from 'lucide-react';
 
 const API = `${import.meta.env.VITE_API_URL}/api/admin/documents`;
 const token = () => localStorage.getItem('adminToken');
@@ -18,15 +41,15 @@ const ROLE_COLORS = {
 
 // Document types HR/CEO can upload on behalf of an employee
 const HR_UPLOAD_TYPES = [
-    { type: 'Offer Letter',         icon: '📨' },
-    { type: 'Appointment Letter',   icon: '📋' },
-    { type: 'Employment Contract',  icon: '📝' },
-    { type: 'Joining Form',         icon: '📄' },
-    { type: 'Salary Slip',          icon: '💰' },
-    { type: 'Increment Letter',     icon: '📈' },
-    { type: 'Warning Letter',       icon: '⚠️' },
-    { type: 'Relieving Letter',     icon: '🔖' },
-    { type: 'Experience Letter',    icon: '💼' },
+    { type: 'Offer Letter' },
+    { type: 'Appointment Letter' },
+    { type: 'Employment Contract' },
+    { type: 'Joining Form' },
+    { type: 'Salary Slip' },
+    { type: 'Increment Letter' },
+    { type: 'Warning Letter' },
+    { type: 'Relieving Letter' },
+    { type: 'Experience Letter' },
 ];
 
 export default function DocumentVerification() {
@@ -188,7 +211,7 @@ export default function DocumentVerification() {
                 <div className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-xl border text-sm font-semibold animate-in slide-in-from-top-2 duration-200 ${
                     toast.type === 'error' ? 'bg-rose-50 border-rose-200 text-rose-700' : 'bg-emerald-50 border-emerald-200 text-emerald-700'
                 }`}>
-                    <span>{toast.type === 'error' ? '⚠️' : '✅'}</span> {toast.msg}
+                    <span>{toast.type === 'error' ? <AlertTriangle size={18} /> : <CheckCircle2 size={18} />}</span> {toast.msg}
                 </div>
             )}
 
@@ -245,9 +268,9 @@ export default function DocumentVerification() {
                                     </div>
                                     {counts.total > 0 && (
                                         <div className="flex gap-2 mt-2 ml-12">
-                                            <MiniCount label="✅" value={counts.verified} />
-                                            <MiniCount label="⏳" value={counts.pending} />
-                                            <MiniCount label="❌" value={counts.rejected} />
+                                            <MiniCount label={<CheckCircle2 size={12} className="inline mr-1" />} value={counts.verified} />
+                                            <MiniCount label={<Clock size={12} className="inline mr-1" />} value={counts.pending} />
+                                            <MiniCount label={<XCircle size={12} className="inline mr-1" />} value={counts.rejected} />
                                         </div>
                                     )}
                                 </button>
@@ -261,7 +284,7 @@ export default function DocumentVerification() {
             <div className="flex-1 bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col overflow-hidden">
                 {!selected && !panelLoading ? (
                     <div className="flex-1 flex flex-col items-center justify-center text-center text-gray-400 p-10">
-                        <div className="w-20 h-20 rounded-full bg-gray-50 border border-dashed border-gray-200 flex items-center justify-center text-4xl mb-4">📂</div>
+                        <div className="w-20 h-20 rounded-full bg-gray-50 border border-dashed border-gray-200 flex items-center justify-center mb-4"><FolderOpen size={32} className="text-gray-400" /></div>
                         <p className="font-bold text-gray-500 text-lg">No employee selected</p>
                         <p className="text-sm mt-1">Select an employee from the list to review their documents.</p>
                     </div>
@@ -295,7 +318,7 @@ export default function DocumentVerification() {
                                     onClick={() => setShowUploadPanel(p => !p)}
                                     className="flex items-center gap-2 text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl shadow-sm transition-colors"
                                 >
-                                    ⬆ Upload for Employee
+                                    <Upload size={16} /> Upload for Employee
                                 </button>
                             </div>
                         </div>
@@ -303,7 +326,7 @@ export default function DocumentVerification() {
                         {/* HR Upload Panel (collapsible) */}
                         {showUploadPanel && (
                             <div className="px-6 py-4 border-b border-indigo-100 bg-indigo-50/60 animate-in slide-in-from-top-2 duration-200">
-                                <h4 className="text-sm font-extrabold text-indigo-800 mb-3">📤 Upload Joining / Professional Document</h4>
+                                <h4 className="flex items-center gap-2 text-sm font-extrabold text-indigo-800 mb-3"><Upload size={16} /> Upload Joining / Professional Document</h4>
                                 <div className="flex flex-wrap items-end gap-3">
                                     <div className="flex-1 min-w-[200px]">
                                         <label className="block text-xs font-semibold text-gray-600 mb-1">Document Type</label>
@@ -313,7 +336,7 @@ export default function DocumentVerification() {
                                             className="w-full text-sm border border-gray-200 rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 bg-white"
                                         >
                                             {HR_UPLOAD_TYPES.map(t => (
-                                                <option key={t.type} value={t.type}>{t.icon} {t.type}</option>
+                                                <option key={t.type} value={t.type}>{t.type}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -327,7 +350,7 @@ export default function DocumentVerification() {
                                             {uploadingForEmp ? (
                                                 <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Uploading...</>
                                             ) : (
-                                                '📁 Choose & Upload File'
+                                                <span className="flex items-center gap-2"><FolderOpen size={16} /> Choose & Upload File</span>
                                             )}
                                         </button>
                                     </div>
@@ -339,7 +362,7 @@ export default function DocumentVerification() {
                                     </button>
                                 </div>
                                 <p className="text-xs text-indigo-600 mt-2.5">
-                                    ℹ️ Documents uploaded here will appear in the employee's documents page as <strong>auto-verified</strong>.
+                                    <span className="inline-flex"><Info size={16} className="inline mr-1" /></span> Documents uploaded here will appear in the employee's documents page as <strong>auto-verified</strong>.
                                 </p>
                             </div>
                         )}
@@ -348,7 +371,7 @@ export default function DocumentVerification() {
                         <div className="flex-1 overflow-y-auto p-5 space-y-4">
                             {selected.documents.length === 0 ? (
                                 <div className="flex flex-col items-center justify-center py-16 text-center text-gray-400">
-                                    <span className="text-5xl mb-3">📭</span>
+                                    <span className="mb-3"><Inbox size={48} className="text-gray-300" /></span>
                                     <p className="font-semibold text-gray-500">No documents uploaded yet</p>
                                     <p className="text-sm mt-1">This employee has not uploaded any documents.</p>
                                 </div>
@@ -363,7 +386,7 @@ export default function DocumentVerification() {
                                             <div className="flex items-start justify-between gap-4 flex-wrap">
                                                 <div className="flex items-center gap-3">
                                                     <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-xl shadow-sm">
-                                                        {doc.mimeType === 'application/pdf' ? '📑' : '🖼️'}
+                                                        {doc.mimeType === 'application/pdf' ? <FileText size={24} className="text-gray-500" /> : <ImageIcon size={24} className="text-gray-500" />}
                                                     </div>
                                                     <div>
                                                         <p className="font-bold text-gray-900 text-sm">{doc.documentType}</p>
@@ -378,8 +401,8 @@ export default function DocumentVerification() {
                                                 </div>
                                                 <div className="flex items-center gap-2 shrink-0">
                                                     {isHRUploaded && (
-                                                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100">
-                                                            🏢 Company
+                                                        <span className="flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100">
+                                                            <Building size={12} /> Company
                                                         </span>
                                                     )}
                                                     <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide border ${sc.cls}`}>
@@ -403,7 +426,7 @@ export default function DocumentVerification() {
                                                     disabled={viewLoading}
                                                     className="flex items-center gap-1.5 text-sm font-semibold bg-white border border-gray-200 text-gray-600 hover:text-indigo-700 hover:border-indigo-200 hover:bg-indigo-50 px-4 py-2 rounded-xl transition-colors"
                                                 >
-                                                    👁 View Document
+                                                    <Eye size={16} /> View Document
                                                 </button>
 
                                                 {!isHRUploaded && doc.status !== 'verified' && (
@@ -412,7 +435,7 @@ export default function DocumentVerification() {
                                                         disabled={state.loading}
                                                         className="flex items-center gap-1.5 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl shadow-sm transition-colors disabled:opacity-60"
                                                     >
-                                                        {state.loading ? <Spinner /> : '✅'} Approve
+                                                        {state.loading ? <Spinner /> : <CheckCircle2 size={16} />} Approve
                                                     </button>
                                                 )}
 
@@ -421,7 +444,7 @@ export default function DocumentVerification() {
                                                         onClick={() => updateAction(doc._id, { showRemark: !state.showRemark })}
                                                         className="flex items-center gap-1.5 text-sm font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 px-4 py-2 rounded-xl transition-colors"
                                                     >
-                                                        ❌ Reject
+                                                        <XCircle size={16} /> Reject
                                                     </button>
                                                 )}
                                             </div>
@@ -475,7 +498,7 @@ export default function DocumentVerification() {
                                         onClick={() => handleDownload(viewDoc)}
                                         className="flex items-center gap-2 text-sm font-semibold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition-colors border border-indigo-100"
                                     >
-                                        ⬇ Download
+                                        <Download size={16} /> Download
                                     </button>
                                 )}
                                 <button onClick={() => setViewDoc(null)} className="text-gray-400 hover:text-gray-700 p-1.5 rounded-lg hover:bg-gray-100 transition-colors">

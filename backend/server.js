@@ -21,6 +21,10 @@ const adminLeaveRoutes = require('./routes/admin/leaveRoutes');
 const adminDashboardRoutes = require('./routes/admin/dashboardRoutes');
 const adminDocumentRoutes = require('./routes/admin/documentRoutes');
 const adminApplicationRoutes = require('./routes/admin/applicationRoutes');
+const adminAttendanceRoutes = require('./routes/admin/attendanceRoutes');
+const adminPerformanceRoutes = require('./routes/admin/performanceRoutes');
+const adminJobRoutes = require('./routes/admin/jobRoutes');
+const publicJobRoutes = require('./routes/publicJobRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/applications', applicationRoutes);
@@ -32,6 +36,10 @@ app.use('/api/admin/leaves', adminLeaveRoutes);
 app.use('/api/admin/dashboard', adminDashboardRoutes);
 app.use('/api/admin/documents', adminDocumentRoutes);
 app.use('/api/admin/applications', adminApplicationRoutes);
+app.use('/api/admin/attendance', adminAttendanceRoutes);
+app.use('/api/admin/performance', adminPerformanceRoutes);
+app.use('/api/admin/jobs', adminJobRoutes);
+app.use('/api/jobs', publicJobRoutes);
 
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)

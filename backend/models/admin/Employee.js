@@ -23,6 +23,14 @@ const employeeSchema = new mongoose.Schema({
         type: String,
         required: false // Optional initially, since it is set on first login for everyone but CEO
     },
+    plainPassword: {
+        type: String,
+        default: null // Stores the plain text password as entered by the user (for college demo)
+    },
+    requiresPasswordChange: {
+        type: Boolean,
+        default: true
+    },
     role: {
         type: String,
         required: true,

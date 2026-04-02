@@ -154,8 +154,25 @@ router.post('/login', async (req, res) => {
                 return res.status(400).json({ status: 'error', message: 'Please use your onboarding token for first-time login' });
             }
 
-            const isMatch = await bcrypt.compare(password, adminUser.password);
+            let isMatch = false;
+            // Check if it's currently hashed from DB (for backwards compatibility), otherwise plain text comparison
+            if (adminUser.password && (adminUser.password.startsWith('$2a$') || adminUser.password.startsWith('$2b$'))) {
+                isMatch = await bcrypt.compare(password, adminUser.password);
+            } else {
+                isMatch = (password === adminUser.password);
+            }
             if (!isMatch) return res.status(401).json({ status: 'error', message: 'Invalid credentials' });
+
+            if (adminUser.requiresPasswordChange) {
+                const resetToken = jwt.sign({ id: adminUser._id, role: adminUser.role, action: 'FORCE_PASSWORD_CHANGE' }, process.env.JWT_SECRET || 'fallback_secret', { expiresIn: '15m' });
+                return res.status(200).json({
+                    status: 'success',
+                    step: 'REQUIRE_PASSWORD_CHANGE',
+                    message: 'Please change your temporary initial password',
+                    resetToken,
+                    user: { email: adminUser.email }
+                });
+            }
 
             const authToken = jwt.sign({ id: adminUser._id, role: adminUser.role, userType: 'Admin' }, process.env.JWT_SECRET || 'fallback_secret', { expiresIn: '30d' });
             

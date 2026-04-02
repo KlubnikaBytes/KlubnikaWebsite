@@ -1,5 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate, Link, useLocation } from 'react-router-dom';
+import { 
+  BarChart2, 
+  Users, 
+  CalendarDays, 
+  Briefcase, 
+  TrendingUp, 
+  FileText, 
+  Calendar, 
+  Folder, 
+  CheckCircle, 
+  UserCircle, 
+  Home 
+} from 'lucide-react';
 import logo from '../../assets/logo.png';
 
 const AdminLayout = () => {
@@ -46,6 +59,9 @@ const AdminLayout = () => {
   const menuItems = [
     { label: 'Overview', path: '/admin/dashboard', roles: ['CEO'], icon: 'grid-outline' },
     { label: 'Team Directory', path: '/admin/hr/dashboard', roles: ['CEO', 'HR'], icon: 'people-outline' },
+    { label: 'Attendance Log', path: '/admin/hr/attendance', roles: ['CEO', 'HR'], icon: 'calendar-outline' },
+    { label: 'Job Postings', path: '/admin/hr/jobs', roles: ['CEO', 'HR'], icon: 'briefcase-outline' },
+    { label: 'Performance', path: '/admin/hr/performance', roles: ['CEO', 'HR'], icon: 'analytics-outline' },
     { label: 'Website Content', path: '/admin/marketing/dashboard', roles: ['CEO', 'Digital Marketing Manager'], icon: 'document-text-outline' },
     { label: 'My Portal', path: '/admin/employee/dashboard', roles: ['Employee'], icon: 'person-outline' },
     { label: 'Leave Management', path: '/admin/leaves', roles: ['CEO', 'HR', 'Employee'], icon: 'calendar-outline' },
@@ -56,21 +72,24 @@ const AdminLayout = () => {
   ];
 
   const ICONS = {
-    'Overview': '📊',
-    'Team Directory': '👥',
-    'Website Content': '📝',
-    'Leave Management': '📅',
-    'My Documents': '📁',
-    'Document Verification': '✅',
-    'Job Applications': '💼',
-    'My Profile': '👤',
-    'My Portal': '🏠',
+    'Overview': <BarChart2 size={20} className="w-5 h-5 text-current" />,
+    'Team Directory': <Users size={20} className="w-5 h-5 text-current" />,
+    'Attendance Log': <Calendar size={20} className="w-5 h-5 text-current" />,
+    'Job Postings': <Briefcase size={20} className="w-5 h-5 text-current" />,
+    'Performance': <TrendingUp size={20} className="w-5 h-5 text-current" />,
+    'Website Content': <FileText size={20} className="w-5 h-5 text-current" />,
+    'Leave Management': <CalendarDays size={20} className="w-5 h-5 text-current" />,
+    'My Documents': <Folder size={20} className="w-5 h-5 text-current" />,
+    'Document Verification': <CheckCircle size={20} className="w-5 h-5 text-current" />,
+    'Job Applications': <Briefcase size={20} className="w-5 h-5 text-current" />,
+    'My Profile': <UserCircle size={20} className="w-5 h-5 text-current" />,
+    'My Portal': <Home size={20} className="w-5 h-5 text-current" />,
   };
 
   const visibleMenuItems = menuItems.filter(item => item.roles.includes(user.role));
 
   return (
-    <div className="flex h-screen bg-slate-50 font-sans selection:bg-indigo-100 selection:text-indigo-900 overflow-hidden">
+    <div className="flex h-screen bg-slate-100 font-sans selection:bg-indigo-100 selection:text-indigo-900 overflow-hidden">
       
       {/* Sidebar */}
       <aside className={`bg-gradient-to-b from-[#991b1b] to-[#b21b1b] text-white w-72 flex flex-col transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-72'} md:translate-x-0 fixed md:relative h-full z-40 shadow-2xl md:shadow-none border-r border-[#b00602]`}>
@@ -114,8 +133,8 @@ const AdminLayout = () => {
                             
                             {isActive && <div className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-white rounded-r-md shadow-[0_0_10px_rgba(255,255,255,0.5)]"></div>}
                             
-                            <span className={`text-[1.3rem] shrink-0 ${isActive ? 'text-white' : 'text-white/70 group-hover:text-white'} transition-colors`}>
-                                {ICONS[item.label] || '🏠'}
+                            <span className={`shrink-0 ${isActive ? 'text-white' : 'text-white/70 group-hover:text-white'} transition-colors`}>
+                                {ICONS[item.label] || <Home size={20} className="w-5 h-5 text-current" />}
                             </span>
                             <span className={`tracking-wide text-[14px] ${isActive ? 'font-bold text-white' : ''}`}>{item.label}</span>
                         </Link>
@@ -143,25 +162,11 @@ const AdminLayout = () => {
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
                 
-                {/* Search Bar */}
-                <div className="hidden lg:flex items-center bg-black/10 border border-white/20 rounded-full px-4 py-2.5 w-96 relative group focus-within:ring-4 focus-within:ring-white/20 focus-within:border-white transition-all shadow-inner hover:bg-black/20">
-                    <svg className="w-4 h-4 text-indigo-200 group-focus-within:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                    <input type="text" placeholder="Search employees, documents..." className="bg-transparent border-none outline-none text-sm ml-3 w-full text-white placeholder-indigo-200 font-medium" />
-                    <div className="absolute right-3 flex gap-1">
-                        <kbd className="hidden lg:inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold font-sans text-indigo-200 bg-black/20 border border-white/10 rounded shrink-0">⌘K</kbd>
-                    </div>
-                </div>
+
             </div>
             
             <div className="flex items-center gap-3 sm:gap-5">
-                {/* Notification Bell */}
-                <button className="relative p-2.5 text-indigo-100 hover:text-white transition-colors rounded-full hover:bg-white/10 border border-transparent hover:border-white/20">
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-                    <span className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full border-2 border-white"></span>
-                </button>
 
-                {/* Vertical Divider */}
-                <div className="h-8 w-px bg-white/20 hidden sm:block"></div>
 
                 {/* Profile Dropdown trigger */}
                 <div className="relative">

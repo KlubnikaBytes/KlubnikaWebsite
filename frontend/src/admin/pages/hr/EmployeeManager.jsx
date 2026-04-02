@@ -21,8 +21,12 @@ const EmployeeManager = () => {
         email: '',
         role: 'Employee',
         designation: '',
-        department: ''
+        department: '',
+        password: ''
     });
+
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [editTargetId, setEditTargetId] = useState(null);
 
     // Token Modal State
     const [tokenData, setTokenData] = useState(null);
@@ -70,13 +74,60 @@ const EmployeeManager = () => {
             if (res.ok) {
                 setEmployees([...employees, data.employee]);
                 setShowAddModal(false);
-                setFormData({ employeeId: '', name: '', email: '', role: 'Employee', designation: '', department: '' });
+                setFormData({ employeeId: '', name: '', email: '', role: 'Employee', designation: '', department: '', password: '' });
                 alert('Personnel added successfully!');
             } else {
                 alert(data.message || 'Failed to add personnel');
             }
         } catch (err) {
             alert('Server error while adding personnel');
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    const handleEditClick = (emp) => {
+        setFormData({
+            employeeId: emp.employeeId,
+            name: emp.name,
+            email: emp.email,
+            role: emp.role,
+            designation: emp.designation || '',
+            department: emp.department || '',
+            password: ''
+        });
+        setEditTargetId(emp._id);
+        setShowEditModal(true);
+    };
+
+    const handleEditSubmit = async (e) => {
+        e.preventDefault();
+        setSaving(true);
+        try {
+            const payload = { ...formData };
+            delete payload.password; // Ignore password during edit
+            if (!payload.department) delete payload.department;
+
+            const res = await fetch(`/api/admin/hr/employees/${editTargetId}`, {
+                method: 'PUT',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+                },
+                body: JSON.stringify(payload)
+            });
+            
+            const data = await res.json();
+            if (res.ok) {
+                setEmployees(employees.map(emp => emp._id === editTargetId ? data.employee : emp));
+                setShowEditModal(false);
+                setFormData({ employeeId: '', name: '', email: '', role: 'Employee', designation: '', department: '', password: '' });
+                alert('Personnel updated successfully!');
+            } else {
+                alert(data.message || 'Failed to update personnel');
+            }
+        } catch (err) {
+            alert('Server error while updating personnel');
         } finally {
             setSaving(false);
         }
@@ -313,7 +364,7 @@ const EmployeeManager = () => {
                                                         Remove
                                                     </button>
                                                 )}
-                                                <button className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors border border-transparent hover:border-indigo-100" title="Edit Staff">
+                                                <button onClick={() => handleEditClick(emp)} className="p-2 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors border border-transparent hover:border-indigo-100" title="Edit Staff">
                                                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
                                                 </button>
                                             </div>
@@ -446,6 +497,11 @@ const EmployeeManager = () => {
                                         <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="block w-full border-slate-200 rounded-2xl shadow-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 sm:text-sm border px-4 py-3.5 transition-all text-slate-900 font-medium bg-slate-50 hover:bg-white focus:bg-white" placeholder="jane@klubnikabytes.com" />
                                     </div>
                                     <div>
+                                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Initial Password <span className="text-rose-500">*</span></label>
+                                        <input required type="text" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} className="block w-full border-slate-200 rounded-2xl shadow-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 sm:text-sm border px-4 py-3.5 transition-all text-slate-900 font-medium bg-slate-50 hover:bg-white focus:bg-white" placeholder="Provide a temporary password..." />
+                                        <p className="text-[10px] text-slate-400 font-bold mt-1.5 ml-1">The employee will use this to log in immediately.</p>
+                                    </div>
+                                    <div>
                                         <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">System Role <span className="text-rose-500">*</span></label>
                                         <div className="relative">
                                             <select required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="block w-full appearance-none border-slate-200 rounded-2xl shadow-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 sm:text-sm border px-4 py-3.5 transition-all text-slate-900 font-bold bg-slate-50 hover:bg-white focus:bg-white cursor-pointer">
@@ -477,6 +533,70 @@ const EmployeeManager = () => {
                     </div>
                 </div>
             )}
+            
+            {/* Edit Personnel Modal */}
+            {showEditModal && (
+                <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-300">
+                    <div className="bg-white rounded-3xl shadow-2xl max-w-xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-300">
+                        <div className="flex justify-between items-center p-6 border-b border-slate-100 bg-slate-50/50 shrink-0">
+                            <h3 className="text-xl font-extrabold text-slate-900 flex items-center gap-3">
+                                <div className="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-xl outline outline-4 outline-indigo-50 flex items-center justify-center shadow-sm">
+                                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                                </div>
+                                Edit Personnel
+                            </h3>
+                            <button onClick={() => setShowEditModal(false)} className="text-slate-400 hover:text-slate-700 bg-white hover:bg-slate-100 p-2 rounded-xl transition-all shadow-sm border border-slate-200">
+                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                            </button>
+                        </div>
+                        <div className="overflow-y-auto custom-scrollbar flex-1 p-6">
+                            <form id="edit-personnel-form" onSubmit={handleEditSubmit} className="space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div className="md:col-span-2">
+                                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Full Name <span className="text-rose-500">*</span></label>
+                                        <input required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="block w-full border-slate-200 rounded-2xl shadow-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 sm:text-sm border px-4 py-3.5 transition-all text-slate-900 font-medium bg-slate-50 hover:bg-white focus:bg-white" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Employee ID <span className="text-rose-500">*</span></label>
+                                        <input required type="text" value={formData.employeeId} onChange={e => setFormData({...formData, employeeId: e.target.value})} className="block w-full border-slate-200 rounded-2xl shadow-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 sm:text-sm border px-4 py-3.5 transition-all text-slate-900 font-medium bg-slate-50 hover:bg-white focus:bg-white uppercase" disabled />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Email Address <span className="text-rose-500">*</span></label>
+                                        <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="block w-full border-slate-200 rounded-2xl shadow-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 sm:text-sm border px-4 py-3.5 transition-all text-slate-900 font-medium bg-slate-50 hover:bg-white focus:bg-white" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">System Role <span className="text-rose-500">*</span></label>
+                                        <div className="relative">
+                                            <select required value={formData.role} onChange={e => setFormData({...formData, role: e.target.value})} className="block w-full appearance-none border-slate-200 rounded-2xl shadow-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 sm:text-sm border px-4 py-3.5 transition-all text-slate-900 font-bold bg-slate-50 hover:bg-white focus:bg-white cursor-pointer">
+                                                <option value="Employee">Employee (Standard)</option>
+                                                <option value="HR">Human Resources</option>
+                                                <option value="Digital Marketing Manager">Digital Marketing Manager</option>
+                                                <option value="CEO">CEO (Executive)</option>
+                                            </select>
+                                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+                                                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Official Designation</label>
+                                        <input type="text" value={formData.designation} onChange={e => setFormData({...formData, designation: e.target.value})} className="block w-full border-slate-200 rounded-2xl shadow-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 sm:text-sm border px-4 py-3.5 transition-all text-slate-900 font-medium bg-slate-50 hover:bg-white focus:bg-white" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div className="p-6 border-t border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row justify-end space-y-3 sm:space-y-0 sm:space-x-3 shrink-0">
+                            <button type="button" onClick={() => setShowEditModal(false)} className="w-full sm:w-auto px-6 py-3.5 border border-slate-200 rounded-xl shadow-sm text-sm font-bold text-slate-700 bg-white hover:bg-slate-50 transition-colors">Cancel</button>
+                            <button type="submit" form="edit-personnel-form" disabled={saving} className="w-full sm:w-auto px-6 py-3.5 border border-transparent rounded-xl shadow-md text-sm font-bold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 focus:ring-4 focus:ring-indigo-500/30 transition-all disabled:opacity-70 flex items-center justify-center gap-2">
+                                {saving ? (
+                                    <><div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin"></div> Updating...</>
+                                ) : 'Save Changes'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            
             {/* Token Display Modal */}
             {tokenData && (
                 <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-300">

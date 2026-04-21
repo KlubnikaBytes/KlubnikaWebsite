@@ -5,7 +5,7 @@ const servicesData = [
     {
         number: '01',
         title: 'Software Engineering',
-        description: 'Architecting scalable, cloud-native applications and enterprise systems using modern stack methodologies.',
+        description: 'Creating scalable cloud-native apps and enterprise solutions with modern development stacks.',
         color: '#2563eb',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -16,7 +16,7 @@ const servicesData = [
     {
         number: '02',
         title: 'Mobility Solutions',
-        description: 'High-concurrency mobile experiences built for iOS and Android with a focus on native performance.',
+        description: 'High-performance mobile app development for iOS and Android built to scale.',
         color: '#6366f1',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -28,7 +28,7 @@ const servicesData = [
     {
         number: '03',
         title: 'Experience Design',
-        description: 'User-centric interface design focused on reducing friction and maximizing conversion through data-driven UX.',
+        description: 'Creating user-focused designs that reduce friction and boost conversions.',
         color: '#0ea5e9',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -39,7 +39,7 @@ const servicesData = [
     {
         number: '04',
         title: 'Cloud Strategy',
-        description: 'End-to-end digital transformation and DevOps integration to modernize legacy business operations.',
+        description: 'Upgrading legacy systems with smart digital transformation and DevOps services.',
         color: '#3b82f6',
         icon: (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -48,7 +48,59 @@ const servicesData = [
                 <line x1="6" y1="20" x2="6" y2="16"></line>
             </svg>
         )
-    }
+    },
+    {
+        number: '05',
+        title: 'Web Development',
+        description: 'We provide high-performance, scalable web development solutions built to grow with your business and ensure long-term reliability.',
+        color: '#ec4899',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+        )
+    },
+    {
+        number: '06',
+        title: 'Mobile App Development',
+        description: 'Our applications are built for seamless performance, delivering fast, reliable functionality and an exceptional user experience.',
+        color: '#8b5cf6',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <path d="M12 18h.01"></path>
+            </svg>
+        )
+    },
+    {
+        number: '07',
+        title: 'Internet Of Things',
+        description: 'Craft a distinctive business strategy that capitalizes on the complete, interconnected capabilities of the Internet of Things.',
+        color: '#14b8a6',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+            </svg>
+        )
+    },
+
+    {
+        number: '08',
+        title: 'Digital Marketing',
+        description: 'We help your business stand out online and bring in the right audience through smart, results-driven digital marketing strategies.',
+        color: '#10b981',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 12a10 10 0 1 0 20 0 10 10 0 1 0-20 0z"></path>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                <path d="M2 12h20"></path>
+            </svg>
+        )
+    },
 ];
 
 const Services = () => {
@@ -59,8 +111,7 @@ const Services = () => {
                     <span className="corp-badge">Expertise</span>
                     <h2 className="services-title-v2">Enterprise <span>Capabilities</span></h2>
                     <p className="services-desc-v2">
-                        We deliver specialized technology services designed to navigate the complexities
-                        of the modern digital ecosystem.
+                        Specialised technology solutions built for modern business challenges and digital growth.
                     </p>
                 </div>
 

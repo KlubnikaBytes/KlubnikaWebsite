@@ -12,7 +12,7 @@ const AboutHome = () => {
     const features = [
         {
             title: 'Digital Transformation',
-            desc: 'Architecting scalable cloud infrastructures and modernizing legacy systems for the digital-first era.',
+            desc: 'Helping businesses grow with scalable cloud solutions and modern software upgrades.',
             icon: (
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M20 7L12 3L4 7M20 7L12 11M20 7V17L12 21M12 11L4 7M12 11V21M4 7V17L12 21" strokeLinecap="round" strokeLinejoin="round" />
@@ -21,7 +21,7 @@ const AboutHome = () => {
         },
         {
             title: 'Strategic Engineering',
-            desc: 'Precision-led development focused on high-concurrency, security, and optimized performance metrics.',
+            desc: 'Reliable web development in Kolkata with a focus on security, performance and scalable user experience.',
             icon: (
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <rect x="2" y="3" width="20" height="14" rx="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -31,7 +31,7 @@ const AboutHome = () => {
         },
         {
             title: 'Data Intelligence',
-            desc: 'Leveraging advanced analytics and AI-driven insights to power informed business decision-making.',
+            desc: 'Helping businesses grow with data analytics and AI-powered decision-making.',
             icon: (
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" strokeLinecap="round" strokeLinejoin="round" />
@@ -50,9 +50,7 @@ const AboutHome = () => {
                     <div className="badge">Corporate Identity</div>
                     <h2 className="about-main-title">Modernizing the <span>Digital Landscape</span></h2>
                     <p className="about-lead-text">
-                        Klubnika Bytes is a leading technology consultancy focused on delivering
-                        enterprise-grade software solutions. We specialize in bridge-building between
-                        complex business requirements and cutting-edge technical execution.
+                        Leading web developer company in Kolkata delivering scalable websites, software and digital growth solutions. We specialise in bridging strategy, technology & execution to help businesses grow with cutting-edge web development solutions.
                     </p>
                 </div>
 

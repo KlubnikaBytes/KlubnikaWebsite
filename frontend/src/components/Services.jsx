@@ -87,9 +87,43 @@ const servicesData = [
             </svg>
         )
     },
-
     {
         number: '08',
+        title: 'Game Development',
+        description: 'We turn your ideas into engaging, immersive games — Crafted with creativity, interactivity and precision to deliver unforgettable player experiences.',
+        color: '#f59e0b',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect>
+                <path d="M6 12h4"></path>
+                <path d="M8 10v4"></path>
+                <circle cx="15" cy="13" r="1"></circle>
+                <circle cx="18" cy="11" r="1"></circle>
+            </svg>
+        )
+    },
+    {
+        number: '09',
+        title: 'Artificial Intelligence',
+        description: 'Empower your business to reach its brand objectives with strategic, structured AI-driven solutions.',
+        color: '#ef4444',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                <path d="M9 9h6v6H9z"></path>
+                <line x1="9" y1="1" x2="9" y2="4"></line>
+                <line x1="15" y1="1" x2="15" y2="4"></line>
+                <line x1="9" y1="20" x2="9" y2="23"></line>
+                <line x1="15" y1="20" x2="15" y2="23"></line>
+                <line x1="20" y1="9" x2="23" y2="9"></line>
+                <line x1="20" y1="14" x2="23" y2="14"></line>
+                <line x1="1" y1="9" x2="4" y2="9"></line>
+                <line x1="1" y1="14" x2="4" y2="14"></line>
+            </svg>
+        )
+    },
+    {
+        number: '10',
         title: 'Digital Marketing',
         description: 'We help your business stand out online and bring in the right audience through smart, results-driven digital marketing strategies.',
         color: '#10b981',
@@ -101,6 +135,19 @@ const servicesData = [
             </svg>
         )
     },
+    {
+        number: '11',
+        title: 'Data Science Consulting',
+        description: 'At Klubnika Bytes, we deliver advanced data science consulting solutions driven by expertise, innovation and a strong commitment to excellence.',
+        color: '#6366f1',
+        icon: (
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+        )
+    }
 ];
 
 const Services = () => {

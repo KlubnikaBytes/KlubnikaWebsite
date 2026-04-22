@@ -21,6 +21,13 @@ const Contact = () => {
             if (response.ok) {
                 setStatus('Message sent successfully!');
                 setFormData({ name: '', email: '', message: '' });
+                
+                // Trigger Google Ads conversion event
+                if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
+                    window.gtag('event', 'conversion', {
+                        'send_to': 'AW-18005464206/U0MdCP3qhZQcEI6p1olD'
+                    });
+                }
             } else {
                 setStatus('Failed to send message.');
             }

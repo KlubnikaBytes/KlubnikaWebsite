@@ -90,6 +90,13 @@ const Footer = () => {
                 </div>
             </div>
 
+            {/* SEO Keywords Section */}
+            <div className="container kb-footer-seo" style={{ fontSize: '0.75rem', color: 'rgba(255, 255, 255, 0.5)', marginTop: '2rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '1.5rem', paddingBottom: '0.5rem', lineHeight: '1.6', textAlign: 'center' }}>
+                <p style={{ margin: 0 }}>
+                    <strong>Popular Searches:</strong> website developer in Kolkata | website design Kolkata | website builder in Kolkata | web design Kolkata | web developer company in Kolkata | web development company in Kolkata | app development company in Kolkata | website design company in Kolkata | web design company in Kolkata | best website design company in Kolkata | app development company Kolkata | website making company in Kolkata | mobile app development company in Kolkata | best web development company in Kolkata | website development in Kolkata | best web design company in Kolkata | best website development company in Kolkata | best web design company Kolkata | best web development company Kolkata | software development company in Kolkata | Klubnika bytes
+                </p>
+            </div>
+
             {/* Bottom Bar */}
             <div className="kb-footer-bottom">
                 <div className="container kb-footer-bottom-inner">

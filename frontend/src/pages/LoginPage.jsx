@@ -316,9 +316,9 @@ const LoginPage = () => {
                                 />
                             </div>
                             <div className="input-group">
-                                <label style={{display: 'flex', justifyContent: 'space-between'}}>
+                                <label style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <span>Password or Onboarding Token</span>
-                                    <span style={{cursor: 'pointer', color: '#4f46e5', fontSize: '12px'}} onClick={() => {setStep(6); setError(null);}}>Forgot Password?</span>
+                                    <span style={{ cursor: 'pointer', color: '#4f46e5', fontSize: '12px' }} onClick={() => { setStep(6); setError(null); }}>Forgot Password?</span>
                                 </label>
                                 <input
                                     type="password"
@@ -327,7 +327,6 @@ const LoginPage = () => {
                                     onChange={handleChange}
                                     placeholder="•••••••• or your token"
                                 />
-                                <small>CEO login: leave password blank</small>
                             </div>
                             <button type="submit" className="auth-btn">Sign In →</button>
                         </form>
@@ -422,7 +421,7 @@ const LoginPage = () => {
                                 <input type="text" name="email" value={formData.email} onChange={handleChange} required placeholder="you@example.com or KB_XXX" />
                             </div>
                             <button type="submit" className="auth-btn">Send Recovery OTP →</button>
-                            <button type="button" onClick={() => {setStep(1); setError(null);}} className="auth-btn" style={{marginTop: '10px', background: '#334155'}}>Cancel</button>
+                            <button type="button" onClick={() => { setStep(1); setError(null); }} className="auth-btn" style={{ marginTop: '10px', background: '#334155' }}>Cancel</button>
                         </form>
                     )}
 
@@ -442,7 +441,7 @@ const LoginPage = () => {
                                 <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required placeholder="Re-enter password" />
                             </div>
                             <button type="submit" className="auth-btn">Reset Password →</button>
-                            <button type="button" onClick={() => {setStep(6); setError(null);}} className="auth-btn" style={{marginTop: '10px', background: '#334155'}}>Back</button>
+                            <button type="button" onClick={() => { setStep(6); setError(null); }} className="auth-btn" style={{ marginTop: '10px', background: '#334155' }}>Back</button>
                         </form>
                     )}
 

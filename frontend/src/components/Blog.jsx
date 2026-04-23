@@ -59,12 +59,7 @@ const Blog = () => {
                                 </div>
                                 <h3 className="card-title-v2">{post.title}</h3>
                                 <p className="card-text-v2">{post.description}</p>
-                                <a href={post.link} className="card-link-v2">
-                                    Read Full Analysis
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                        <path d="M5 12h14M12 5l7 7-7 7" />
-                                    </svg>
-                                </a>
+
                             </div>
                         </article>
                     ))}

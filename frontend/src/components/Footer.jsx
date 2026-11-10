@@ -221,6 +221,8 @@ const Footer = () => {
             <Link to="/cancellation-refund-policy">Cancellation &amp; Refund</Link>
             <span className="kb-policy-dot">•</span>
             <Link to="/shipping-delivery-policy">Service Delivery Policy</Link>
+            <span className="kb-policy-dot">•</span>
+            <Link to="/workplace-policy">Workplace Policy</Link>
           </div>
         </div>
       </div>

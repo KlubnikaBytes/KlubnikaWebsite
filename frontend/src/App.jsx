@@ -6,7 +6,7 @@ import ScrollToTop from './components/ScrollToTop';
 import WhatsAppButton from './components/WhatsAppButton';
 import TechStackModal from './components/common/TechStackModal';
 import Home from './pages/Home';
-import { TermsConditions, PrivacyPolicy, CancellationRefundPolicy, ShippingDeliveryPolicy } from './pages/PolicyPages';
+import { TermsConditions, PrivacyPolicy, CancellationRefundPolicy, ShippingDeliveryPolicy, WorkplacePolicy } from './pages/PolicyPages';
 import './index.css';
 
 // Lazy-loaded routes for optimal loading performance
@@ -86,6 +86,7 @@ function App() {
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/cancellation-refund-policy" element={<CancellationRefundPolicy />} />
                     <Route path="/shipping-delivery-policy" element={<ShippingDeliveryPolicy />} />
+                    <Route path="/workplace-policy" element={<WorkplacePolicy />} />
                     
                     {/* 404 Fallback */}
                     <Route path="*" element={<Navigate to="/" replace />} />

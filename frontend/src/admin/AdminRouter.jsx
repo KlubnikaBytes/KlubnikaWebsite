@@ -18,20 +18,20 @@ import JobPostingsManager from './pages/hr/JobPostingsManager';
 
 const Unauthorized = () => <div className="p-6 text-red-500">Access Denied</div>;
 
-// Simple Auth Guard (Replace with real JWT check later)
+// Simple Auth Guard
 const ProtectedRoute = ({ children, allowedRoles }) => {
-  const token = localStorage.getItem('adminToken');
-  const user = JSON.parse(localStorage.getItem('adminUser'));
+  const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('adminUser') || localStorage.getItem('user') || 'null');
 
-  if (!token) return <Navigate to="/login" />;
-  if (allowedRoles && !allowedRoles.includes(user?.role)) return <Navigate to="/admin/unauthorized" />;
+  if (!token || token === 'null' || token === 'undefined') return <Navigate to="/login" replace />;
+  if (allowedRoles && !allowedRoles.includes(user?.role)) return <Navigate to="/admin/unauthorized" replace />;
 
   return children;
 };
 
 // Redirect users to their respective dashboards based on their role
 const DashboardRedirect = () => {
-    const user = JSON.parse(localStorage.getItem('adminUser'));
+    const user = JSON.parse(localStorage.getItem('adminUser') || localStorage.getItem('user') || 'null');
     if (!user) return <Navigate to="/login" replace />;
     
     switch(user.role) {
@@ -57,13 +57,13 @@ const AdminRouter = () => {
                 </ProtectedRoute>
             }>
                 {/* Dashboards based on role */}
-                <Route path="dashboard" element={<ProtectedRoute allowedRoles={['CEO']}><CeoDashboard /></ProtectedRoute>} />
+                <Route path="dashboard" element={<ProtectedRoute allowedRoles={['CEO', 'HR']}><CeoDashboard /></ProtectedRoute>} />
                 <Route path="hr/dashboard" element={<ProtectedRoute allowedRoles={['CEO', 'HR']}><EmployeeManager /></ProtectedRoute>} />
                 <Route path="hr/attendance" element={<ProtectedRoute allowedRoles={['CEO', 'HR']}><AttendanceManager /></ProtectedRoute>} />
                 <Route path="hr/jobs" element={<ProtectedRoute allowedRoles={['CEO', 'HR']}><JobPostingsManager /></ProtectedRoute>} />
                 <Route path="hr/performance" element={<ProtectedRoute allowedRoles={['CEO', 'HR']}><PerformanceReview /></ProtectedRoute>} />
-                <Route path="marketing/dashboard" element={<ProtectedRoute allowedRoles={['CEO', 'Digital Marketing Manager']}><PageManager /></ProtectedRoute>} />
-                <Route path="employee/dashboard" element={<ProtectedRoute allowedRoles={['Employee']}><EmployeeDashboard /></ProtectedRoute>} />
+                <Route path="marketing/dashboard" element={<ProtectedRoute allowedRoles={['CEO', 'HR', 'Digital Marketing Manager']}><PageManager /></ProtectedRoute>} />
+                <Route path="employee/dashboard" element={<ProtectedRoute allowedRoles={['Employee', 'HR']}><EmployeeDashboard /></ProtectedRoute>} />
                 <Route path="leaves" element={<ProtectedRoute allowedRoles={['CEO', 'HR', 'Employee']}><LeaveDashboard /></ProtectedRoute>} />
                 <Route path="profile" element={<ProtectedRoute allowedRoles={['CEO', 'HR', 'Employee']}><EmployeeProfile /></ProtectedRoute>} />
                 <Route path="documents" element={<ProtectedRoute allowedRoles={['CEO', 'HR', 'Employee']}><MyDocuments /></ProtectedRoute>} />

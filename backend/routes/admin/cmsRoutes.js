@@ -3,8 +3,8 @@ const router = express.Router();
 const { getPages, createPage, updatePage, getSectionByName, upsertSection, getMedia, createMedia } = require('../../controllers/admin/cmsController');
 const { adminAuth, requireRole } = require('../../middleware/admin/authMiddleware');
 
-// Only CEO and Digital Marketing Manager can access CMS
-router.use(adminAuth, requireRole(['CEO', 'Digital Marketing Manager']));
+// CEO, HR, and Digital Marketing Manager can access CMS
+router.use(adminAuth, requireRole(['CEO', 'HR', 'Digital Marketing Manager']));
 
 router.get('/pages', getPages);
 router.post('/pages', createPage);

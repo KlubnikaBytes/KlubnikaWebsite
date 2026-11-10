@@ -1,0 +1,215 @@
+/* ==========================================================================
+   KLUBINIKA BYTES — INDUSTRY EXPERTISE SECTION
+   ========================================================================== */
+
+.kb-industries-section {
+  padding: 6rem 0;
+  background-color: var(--kb-cream, #F8F1E9);
+  border-top: 1px solid var(--kb-sand, #E5E7EB);
+  border-bottom: 1px solid var(--kb-sand, #E5E7EB);
+}
+
+/* Pills Row */
+.kb-industries-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 2.75rem 0 2.25rem;
+}
+
+.kb-industry-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 1.35rem;
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--kb-sand, #E5E7EB);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--kb-cocoa, #3D2B24);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(50, 32, 27, 0.04);
+}
+
+.kb-industry-pill-btn:hover {
+  border-color: var(--kb-strawberry, #E23A48);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(226, 58, 72, 0.15);
+}
+
+.kb-industry-pill-btn.active {
+  background-color: var(--kb-strawberry, #E23A48);
+  border-color: var(--kb-strawberry, #E23A48);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(226, 58, 72, 0.35);
+}
+
+.kb-pill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--kb-strawberry, #E23A48);
+  transition: color 0.2s ease;
+}
+
+.kb-industry-pill-btn.active .kb-pill-icon {
+  color: #FFFFFF;
+}
+
+/* Detail Card */
+.kb-industry-detail-card {
+  background: #FFFFFF;
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 12px 35px rgba(50, 32, 27, 0.06);
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.kb-detail-card-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.kb-detail-card-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--kb-strawberry, #E23A48);
+  background: rgba(226, 58, 72, 0.1);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.kb-detail-card-headline {
+  font-size: clamp(1.45rem, 2.5vw, 1.85rem);
+  font-weight: 800;
+  color: var(--kb-cocoa, #3D2B24);
+  margin: 0 0 1rem;
+  line-height: 1.25;
+}
+
+.kb-detail-card-desc {
+  font-size: 0.98rem;
+  color: var(--kb-text-muted, #6B5750);
+  line-height: 1.68;
+  margin: 0;
+}
+
+.kb-detail-card-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.kb-detail-chips-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--kb-umber, #573E32);
+}
+
+.kb-detail-chips-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.kb-industry-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background-color: var(--kb-cream, #F8F1E9);
+  padding: 0.85rem 1.15rem;
+  border-radius: 8px;
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--kb-cocoa, #3D2B24);
+  transition: all 0.2s ease;
+}
+
+.kb-industry-chip:hover {
+  border-color: var(--kb-strawberry, #E23A48);
+  transform: translateX(4px);
+}
+
+.kb-chip-check {
+  color: var(--kb-strawberry, #E23A48);
+  flex-shrink: 0;
+}
+
+/* Cross-Sector Specialization Ticker */
+.kb-industry-ticker-wrap {
+  margin-top: 3rem;
+  padding: 1.25rem 1.5rem;
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  overflow: hidden;
+}
+
+.kb-ticker-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--kb-strawberry, #E23A48);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.kb-ticker-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.kb-ticker-chips span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--kb-cocoa, #3D2B24);
+  background: var(--kb-cream, #F8F1E9);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .kb-industry-detail-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .kb-industry-ticker-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .kb-industry-pill-btn {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .kb-industry-detail-card {
+    padding: 1.5rem;
+  }
+}
+

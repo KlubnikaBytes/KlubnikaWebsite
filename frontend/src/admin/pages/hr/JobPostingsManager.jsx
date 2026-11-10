@@ -18,7 +18,7 @@ const JobPostingsManager = () => {
 
     const fetchJobs = async () => {
         try {
-            const res = await fetch('/api/admin/jobs', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/jobs`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (!res.ok) throw new Error('Failed to fetch jobs');
@@ -47,7 +47,7 @@ const JobPostingsManager = () => {
                 benefits: benArray
             };
 
-            const res = await fetch('/api/admin/jobs', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/jobs`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ const JobPostingsManager = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to delete this job posting?')) return;
         try {
-            const res = await fetch(`/api/admin/jobs/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/jobs/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${token}` }
             });

@@ -21,7 +21,7 @@ const PageManager = () => {
     useEffect(() => {
         const fetchPages = async () => {
             try {
-                const res = await fetch('/api/admin/cms/pages', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/cms/pages`, {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
                 });
                 const data = await res.json();
@@ -39,7 +39,7 @@ const PageManager = () => {
         e.preventDefault();
         setSaving(true);
         try {
-            const res = await fetch('/api/admin/cms/pages', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/cms/pages`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ const PageManager = () => {
         if (!confirm(`Are you sure you want to change this page status to ${newStatus}?`)) return;
 
         try {
-            const res = await fetch(`/api/admin/cms/pages/${pageId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/cms/pages/${pageId}`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ const PageManager = () => {
                 }
             };
 
-            const res = await fetch(`/api/admin/cms/pages/${editingPage._id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/cms/pages/${editingPage._id}`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ const PageManager = () => {
         if (action === 'homepage' || action === 'banners') {
             setSectionData({ content: 'Loading...' });
             try {
-                const res = await fetch(`/api/admin/cms/sections/${action}`, {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/cms/sections/${action}`, {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
                 });
                 if (res.ok) {
@@ -157,7 +157,7 @@ const PageManager = () => {
             }
         } else if (action === 'media') {
             try {
-                const res = await fetch('/api/admin/cms/media', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/cms/media`, {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
                 });
                 if (res.ok) {
@@ -174,7 +174,7 @@ const PageManager = () => {
             let parsedContent = sectionData.content;
             try { parsedContent = JSON.parse(sectionData.content); } catch (e) {}
 
-            const res = await fetch(`/api/admin/cms/sections/${activeQuickAction}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/cms/sections/${activeQuickAction}`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -197,7 +197,7 @@ const PageManager = () => {
         e.preventDefault();
         setSaving(true);
         try {
-            const res = await fetch('/api/admin/cms/media', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/cms/media`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',

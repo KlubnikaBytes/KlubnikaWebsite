@@ -39,8 +39,8 @@ const EmployeeManager = () => {
         setLoading(true);
         try {
             const [empRes, refRes] = await Promise.all([
-                fetch('/api/admin/hr/employees', { headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` } }),
-                fetch('/api/admin/referrals', { headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` } })
+                fetch(`${import.meta.env.VITE_API_URL}/api/admin/hr/employees`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` } }),
+                fetch(`${import.meta.env.VITE_API_URL}/api/admin/referrals`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` } })
             ]);
             
             if (empRes.ok) setEmployees(await empRes.json());
@@ -61,7 +61,7 @@ const EmployeeManager = () => {
                 delete payload.department;
             }
 
-            const res = await fetch('/api/admin/hr/employees', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/hr/employees`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -108,7 +108,7 @@ const EmployeeManager = () => {
             delete payload.password; // Ignore password during edit
             if (!payload.department) delete payload.department;
 
-            const res = await fetch(`/api/admin/hr/employees/${editTargetId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/hr/employees/${editTargetId}`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ const EmployeeManager = () => {
 
     const handleIssueToken = async (targetEmployeeId) => {
         try {
-            const res = await fetch('/api/admin/auth/generate-token', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/auth/generate-token`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -172,7 +172,7 @@ const EmployeeManager = () => {
 
     const handleUpdateReferral = async (id, status) => {
         try {
-            const res = await fetch(`/api/admin/referrals/${id}/status`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/referrals/${id}/status`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -189,7 +189,7 @@ const EmployeeManager = () => {
     const handleDeleteEmployee = async (emp) => {
         if (!window.confirm(`Are you sure you want to permanently remove ${emp.name} (${emp.employeeId}) from the system? This action cannot be undone.`)) return;
         try {
-            const res = await fetch(`/api/admin/hr/employees/${emp._id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/hr/employees/${emp._id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
             });

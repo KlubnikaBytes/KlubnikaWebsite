@@ -1,170 +1,548 @@
-:root {
-    --primary-indigo: #4f46e5;
-    --dark-slate: #0f172a;
-    --muted-slate: #475569;
-    --bg-subtle: #f8fafc;
-    --border-soft: #e2e8f0;
+/* ==========================================================================
+   ABOUT HOME SECTION — WHO WE ARE & PHILOSOPHY
+   Redesigned for Senior Corporate / Technology Consulting Aesthetic
+   ========================================================================== */
+
+.kb-about-section {
+  padding: 5.5rem 0 6rem;
+  background-color: var(--kb-white, #FFFFFF);
+  color: var(--kb-cocoa, #3D2B24);
 }
 
-.about-home-section {
-    padding: 100px 20px;
-    background: #ffffff;
-    font-family: 'Inter', -apple-system, sans-serif;
+/* --------------------------------------------------------------------------
+   A. ABOUT US INTRODUCTION — Editorial Split Composition
+   -------------------------------------------------------------------------- */
+.kb-about-intro {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.45fr);
+  gap: 3.5rem 4.5rem;
+  align-items: start;
+  padding-bottom: 3.75rem;
+  border-bottom: 1px solid var(--kb-sand, #D9C9BC);
+  margin-bottom: 3.75rem;
 }
 
-.about-container {
-    max-width: 1200px;
-    margin: 0 auto;
+.kb-about-intro-heading {
+  display: flex;
+  flex-direction: column;
 }
 
-/* Header & Badge */
-.about-header-content {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 80px;
+.kb-about-kicker {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--kb-strawberry, #E23A48);
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: inline-block;
 }
 
-.badge {
-    display: inline-block;
-    background: #eef2ff;
-    color: var(--primary-indigo);
-    padding: 6px 16px;
-    border-radius: 100px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 24px;
+.kb-about-title {
+  font-size: clamp(2.4rem, 4vw, 3.25rem);
+  font-weight: 800;
+  color: var(--kb-cocoa, #3D2B24);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin: 0 0 1.25rem 0;
 }
 
-.about-main-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    color: var(--dark-slate);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 24px;
+.kb-about-accent-line {
+  width: 44px;
+  height: 3px;
+  background-color: var(--kb-strawberry, #E23A48);
+  border-radius: 2px;
 }
 
-.about-main-title span {
-    color: var(--primary-indigo);
+.kb-about-intro-narrative {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
-.about-lead-text {
-    font-size: 1.2rem;
-    color: var(--muted-slate);
-    line-height: 1.6;
+.kb-about-paragraph-primary {
+  font-size: 1.15rem;
+  line-height: 1.72;
+  font-weight: 500;
+  color: var(--kb-cocoa, #3D2B24);
+  margin: 0;
+  text-align: left;
 }
 
-/* Feature Grid (Bento Style) */
-.modern-feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 80px;
+.kb-about-paragraph-secondary {
+  font-size: 1.02rem;
+  line-height: 1.72;
+  color: var(--kb-text-muted, #6B5750);
+  margin: 0;
+  text-align: left;
 }
 
-.modern-feature-card {
-    padding: 40px;
-    background: var(--bg-subtle);
-    border: 1px solid var(--border-soft);
-    border-radius: 20px;
-    transition: all 0.3s ease;
+/* --------------------------------------------------------------------------
+   B. OUR LEADERSHIP & EXPERTISE — 3-Column Editorial Row
+   -------------------------------------------------------------------------- */
+.kb-leadership-editorial {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-bottom: 4rem;
+  padding-bottom: 0.5rem;
 }
 
-.modern-feature-card:hover {
-    background: #fff;
-    border-color: var(--primary-indigo);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-    transform: translateY(-5px);
+.kb-leadership-column {
+  padding: 0 2.25rem;
+  border-right: 1px solid var(--kb-sand, #D9C9BC);
+  display: flex;
+  flex-direction: column;
 }
 
-.icon-frame {
-    width: 50px;
-    height: 50px;
-    color: var(--primary-indigo);
-    margin-bottom: 24px;
+.kb-leadership-column:first-child {
+  padding-left: 0;
 }
 
-.modern-feature-card h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--dark-slate);
-    margin-bottom: 12px;
+.kb-leadership-column:last-child {
+  padding-right: 0;
+  border-right: none;
 }
 
-.modern-feature-card p {
-    color: var(--muted-slate);
-    font-size: 1rem;
-    line-height: 1.5;
+.kb-leadership-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(217, 201, 188, 0.45);
 }
 
-/* Corporate Stats Bar */
-.corporate-stats-bar {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    background: var(--dark-slate);
-    padding: 60px 20px;
-    border-radius: 24px;
-    color: white;
+.kb-leadership-index {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--kb-strawberry, #E23A48);
+  font-feature-settings: 'tnum';
 }
 
-.corp-stat-box {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+.kb-leadership-icon-wrap {
+  color: var(--kb-umber, #8C6F63);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.corp-stat-val {
-    font-size: 2.5rem;
-    font-weight: 800;
+.kb-leadership-column:hover .kb-leadership-icon-wrap {
+  color: var(--kb-strawberry, #E23A48);
+  transform: translateY(-2px);
 }
 
-.corp-stat-lab {
-    font-size: 0.8rem;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 8px;
+.kb-leadership-heading {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--kb-cocoa, #3D2B24);
+  line-height: 1.35;
+  margin: 0 0 0.75rem 0;
+  letter-spacing: -0.01em;
 }
 
-/* CTA */
-.about-action-area {
-    text-align: center;
-    margin-top: 60px;
+.kb-leadership-text {
+  font-size: 0.93rem;
+  line-height: 1.68;
+  color: var(--kb-text-muted, #6B5750);
+  margin: 0;
+  text-align: left;
 }
 
-.premium-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--dark-slate);
-    color: white;
-    padding: 16px 40px;
-    border-radius: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background 0.2s;
+/* --------------------------------------------------------------------------
+   C. OUR MISSION & VISION — Architectural Dual Panels
+   -------------------------------------------------------------------------- */
+.kb-mv-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
 }
 
-.premium-btn:hover {
-    background: var(--primary-indigo);
+.kb-mv-panel {
+  border-radius: 6px;
+  padding: 2.75rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Responsiveness */
-@media (max-width: 992px) {
-    .corporate-stats-bar {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px 0;
-    }
+.kb-mv-panel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(50, 32, 27, 0.08);
+}
+
+/* Mission: Dark Chocolate Brown */
+.kb-mv-panel-mission {
+  background-color: var(--kb-espresso, #32201B);
+  border-left: 4px solid var(--kb-coral, #FF7B88);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
+
+/* Vision: Warm Beige / Cream */
+.kb-mv-panel-vision {
+  background-color: var(--kb-cream, #F8F1E9);
+  border-left: 4px solid var(--kb-cocoa, #3D2B24);
+  border-top: 1px solid var(--kb-sand, #D9C9BC);
+  border-right: 1px solid var(--kb-sand, #D9C9BC);
+  border-bottom: 1px solid var(--kb-sand, #D9C9BC);
+  color: var(--kb-cocoa, #3D2B24);
+}
+
+.kb-mv-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.kb-mv-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.kb-mv-panel-mission .kb-mv-eyebrow {
+  color: var(--kb-coral, #FF7B88);
+}
+
+.kb-mv-panel-vision .kb-mv-eyebrow {
+  color: var(--kb-strawberry, #E23A48);
+}
+
+.kb-mv-title {
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.kb-mv-panel-mission .kb-mv-title {
+  color: #FFFFFF;
+}
+
+.kb-mv-panel-vision .kb-mv-title {
+  color: var(--kb-cocoa, #3D2B24);
+}
+
+.kb-mv-divider {
+  height: 1px;
+  margin: 1.25rem 0 1.5rem;
+  width: 100%;
+}
+
+.kb-mv-panel-mission .kb-mv-divider {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.kb-mv-panel-vision .kb-mv-divider {
+  background-color: var(--kb-sand, #D9C9BC);
+}
+
+.kb-mv-statement {
+  font-size: 1.02rem;
+  line-height: 1.72;
+  margin: 0;
+  text-align: left;
+}
+
+.kb-mv-panel-mission .kb-mv-statement {
+  color: var(--kb-sand, #D9C9BC);
+}
+
+.kb-mv-panel-vision .kb-mv-statement {
+  color: var(--kb-text-muted, #6B5750);
+}
+
+/* --------------------------------------------------------------------------
+   D. COMPANY STATISTICS — Full-Width Unified Corporate Strip
+   -------------------------------------------------------------------------- */
+.kb-stats-strip {
+  background-color: var(--kb-espresso, #32201B);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 2.5rem 2.25rem;
+  margin-bottom: 5rem;
+  box-shadow: 0 8px 24px rgba(50, 32, 27, 0.08);
+}
+
+.kb-stats-item {
+  padding: 0 1.75rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kb-stats-item:first-child {
+  padding-left: 0.5rem;
+}
+
+.kb-stats-item:last-child {
+  padding-right: 0.5rem;
+  border-right: none;
+}
+
+.kb-stats-number {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 800;
+  color: var(--kb-coral, #FF7B88);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.45rem;
+  font-feature-settings: 'tnum';
+}
+
+.kb-stats-description {
+  font-size: 0.88rem;
+  color: var(--kb-sand, #D9C9BC);
+  line-height: 1.45;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   E. Philosophy Section (Preserved)
+   -------------------------------------------------------------------------- */
+.kb-philosophy-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 4rem;
+  align-items: center;
+  background-color: var(--kb-cream, #F8F1E9);
+  padding: 4rem;
+  border-radius: var(--kb-radius-xl, 24px);
+  border: 1px solid var(--kb-sand, #D9C9BC);
+  margin-bottom: 5rem;
+}
+
+.kb-philosophy-title {
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  font-weight: 800;
+  color: var(--kb-cocoa, #3D2B24);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.kb-philosophy-quote {
+  margin: 1.5rem 0 0;
+  padding: 0 0 0 1.25rem;
+  border-left: 3px solid var(--kb-strawberry, #E23A48);
+}
+
+.kb-philosophy-p {
+  color: var(--kb-text-muted, #6B5750);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  text-align: left;
+}
+
+.kb-philosophy-actions {
+  margin-top: 2rem;
+}
+
+/* --------------------------------------------------------------------------
+   F. Three Core Verticals Grid (Preserved)
+   -------------------------------------------------------------------------- */
+.kb-about-verticals-container {
+  margin-top: 3rem;
+}
+
+.kb-verticals-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--kb-cocoa, #3D2B24);
+  margin: 0;
+}
+
+.kb-about-verticals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-top: 2rem;
+}
+
+.kb-vertical-card {
+  background-color: var(--kb-cocoa, #3D2B24);
+  color: var(--kb-white, #FFFFFF);
+  border-radius: var(--kb-radius-lg, 18px);
+  padding: 2.5rem 2rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--kb-hairline-dark, rgba(255, 255, 255, 0.08));
+  box-shadow: var(--kb-shadow-md);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.kb-vertical-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--kb-strawberry, #E23A48);
+  box-shadow: 0 16px 36px rgba(50, 27, 27, 0.25);
+}
+
+.kb-vertical-num {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--kb-coral, #FF7B88);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.25rem;
+}
+
+.kb-vertical-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--kb-white, #FFFFFF);
+  line-height: 1.3;
+  margin: 0 0 0.85rem 0;
+}
+
+.kb-vertical-desc {
+  font-size: 0.96rem;
+  color: var(--kb-taupe, #B9A79B);
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+  flex: 1;
+}
+
+.kb-vertical-arrow {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--kb-coral, #FF7B88);
+  transition: transform 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.kb-vertical-card:hover .kb-vertical-arrow {
+  color: var(--kb-strawberry, #E23A48);
+  transform: translateX(6px);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .kb-about-intro {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .kb-leadership-editorial {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .kb-leadership-column {
+    padding: 0 0 2rem 0;
+    border-right: none;
+    border-bottom: 1px solid var(--kb-sand, #D9C9BC);
+  }
+
+  .kb-leadership-column:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .kb-mv-duo {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .kb-stats-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.5rem;
+    padding: 2.25rem 2rem;
+  }
+
+  .kb-stats-item {
+    border-right: none;
+    padding: 0;
+  }
+
+  .kb-stats-item:nth-child(1),
+  .kb-stats-item:nth-child(2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 1.75rem;
+  }
+
+  .kb-philosophy-grid {
+    grid-template-columns: 1fr;
+    padding: 2.5rem;
+    gap: 2.5rem;
+  }
+
+  .kb-about-verticals-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 600px) {
-    .corporate-stats-bar {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
+  .kb-about-section {
+    padding: 3.75rem 0 4.5rem;
+  }
 
-    .about-main-title {
-        font-size: 2.2rem;
-    }
+  .kb-about-intro {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .kb-about-title {
+    font-size: 2.15rem;
+  }
+
+  .kb-about-paragraph-primary {
+    font-size: 1.05rem;
+  }
+
+  .kb-leadership-editorial {
+    margin-bottom: 3rem;
+  }
+
+  .kb-mv-panel {
+    padding: 2rem 1.5rem;
+  }
+
+  .kb-mv-title {
+    font-size: 1.45rem;
+  }
+
+  .kb-stats-strip {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.75rem 1.25rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .kb-stats-item:nth-child(1),
+  .kb-stats-item:nth-child(2),
+  .kb-stats-item:nth-child(3) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding-bottom: 1.25rem;
+  }
+
+  .kb-philosophy-grid {
+    padding: 1.75rem 1.25rem;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .kb-vertical-card {
+    padding: 1.75rem 1.25rem;
+  }
 }

@@ -14,7 +14,7 @@ const CeoDashboard = () => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const response = await fetch('/api/admin/dashboard/stats', {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/dashboard/stats`, {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
                 });
                 const data = await response.json();
@@ -33,7 +33,7 @@ const CeoDashboard = () => {
         setGeneratedToken('');
         setSelectedEmployee('');
         try {
-            const res = await fetch('/api/admin/hr/employees', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/hr/employees`, {
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
             });
             const data = await res.json();
@@ -48,7 +48,7 @@ const CeoDashboard = () => {
         if (!selectedEmployee) return;
         setGenerating(true);
         try {
-            const res = await fetch('/api/admin/auth/generate-token', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/auth/generate-token`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',

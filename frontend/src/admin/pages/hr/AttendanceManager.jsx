@@ -20,8 +20,8 @@ const AttendanceManager = () => {
     const fetchData = async () => {
         try {
             const [attRes, empRes] = await Promise.all([
-                fetch('/api/admin/attendance/monthly', { headers: { Authorization: `Bearer ${token}` } }),
-                fetch('/api/admin/hr/employees', { headers: { Authorization: `Bearer ${token}` } })
+                fetch(`${import.meta.env.VITE_API_URL}/api/admin/attendance/monthly`, { headers: { Authorization: `Bearer ${token}` } }),
+                fetch(`${import.meta.env.VITE_API_URL}/api/admin/hr/employees`, { headers: { Authorization: `Bearer ${token}` } })
             ]);
             
             if (attRes.ok) setAttendances(await attRes.json());
@@ -41,7 +41,7 @@ const AttendanceManager = () => {
     const handleSave = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('/api/admin/attendance/monthly', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/attendance/monthly`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const AttendanceManager = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Delete this record?')) return;
         try {
-            const res = await fetch(`/api/admin/attendance/monthly/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/attendance/monthly/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${token}` }
             });

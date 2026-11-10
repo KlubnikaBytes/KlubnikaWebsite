@@ -34,7 +34,7 @@ const LeaveDetailsModal = ({ isOpen, onClose, leaveId, currentUser, onLeaveUpdat
         setError('');
         try {
             const token = localStorage.getItem('adminToken');
-            const res = await fetch(`/api/admin/leaves/${leaveId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/leaves/${leaveId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
@@ -57,7 +57,7 @@ const LeaveDetailsModal = ({ isOpen, onClose, leaveId, currentUser, onLeaveUpdat
         setSending(true);
         try {
             const token = localStorage.getItem('adminToken');
-            const res = await fetch(`/api/admin/leaves/${leaveId}/message`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/leaves/${leaveId}/message`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const LeaveDetailsModal = ({ isOpen, onClose, leaveId, currentUser, onLeaveUpdat
         setActionLoading(true);
         try {
             const token = localStorage.getItem('adminToken');
-            const res = await fetch(`/api/admin/leaves/${leaveId}/review`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/leaves/${leaveId}/review`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

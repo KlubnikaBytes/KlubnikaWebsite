@@ -18,26 +18,21 @@ import logo from '../../assets/logo.png';
 const AdminLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const user = JSON.parse(localStorage.getItem('adminUser'));
+  const user = JSON.parse(localStorage.getItem('adminUser') || localStorage.getItem('user') || 'null');
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
-  // Global 401 interceptor — auto-logout on expired token
+  // Global 401 interceptor — auto-logout on unauthorized or expired token
   useEffect(() => {
     const originalFetch = window.fetch;
     window.fetch = async (...args) => {
       const response = await originalFetch(...args);
       if (response.status === 401) {
-        // Clone to allow the caller to also read the body
-        const clone = response.clone();
-        try {
-          const data = await clone.json();
-          if (data?.message === 'Invalid or expired token') {
-            localStorage.removeItem('adminToken');
-            localStorage.removeItem('adminUser');
-            navigate('/login');
-          }
-        } catch { /* ignore parse errors */ }
+        localStorage.removeItem('adminToken');
+        localStorage.removeItem('adminUser');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate('/login');
       }
       return response;
     };
@@ -49,20 +44,21 @@ const AdminLayout = () => {
       return null;
   }
 
-
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
     localStorage.removeItem('adminUser');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     navigate('/login');
   };
 
   const menuItems = [
-    { label: 'Overview', path: '/admin/dashboard', roles: ['CEO'], icon: 'grid-outline' },
+    { label: 'Overview', path: '/admin/dashboard', roles: ['CEO', 'HR'], icon: 'grid-outline' },
     { label: 'Team Directory', path: '/admin/hr/dashboard', roles: ['CEO', 'HR'], icon: 'people-outline' },
     { label: 'Attendance Log', path: '/admin/hr/attendance', roles: ['CEO', 'HR'], icon: 'calendar-outline' },
     { label: 'Job Postings', path: '/admin/hr/jobs', roles: ['CEO', 'HR'], icon: 'briefcase-outline' },
     { label: 'Performance', path: '/admin/hr/performance', roles: ['CEO', 'HR'], icon: 'analytics-outline' },
-    { label: 'Website Content', path: '/admin/marketing/dashboard', roles: ['CEO', 'Digital Marketing Manager'], icon: 'document-text-outline' },
+    { label: 'Website Content', path: '/admin/marketing/dashboard', roles: ['CEO', 'HR', 'Digital Marketing Manager'], icon: 'document-text-outline' },
     { label: 'My Portal', path: '/admin/employee/dashboard', roles: ['Employee'], icon: 'person-outline' },
     { label: 'Leave Management', path: '/admin/leaves', roles: ['CEO', 'HR', 'Employee'], icon: 'calendar-outline' },
     { label: 'My Documents', path: '/admin/documents', roles: ['CEO', 'HR', 'Employee'], icon: 'document-outline' },

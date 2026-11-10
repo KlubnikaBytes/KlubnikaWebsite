@@ -1,3 +1,4 @@
+@import "./styles/tokens.css";
 @import "tailwindcss";
 
 @theme {
@@ -24,17 +25,79 @@
   --color-purple-900: #450a0a;
 }
 
-/* Existing normal user styles will be preserved below if not explicitly overridden by Tailwind */
+/* Global Eyebrow Styling — Proper character and word spacing across all pages */
+.kb-eyebrow,
+.kb-eyebrow-dark,
+.kb-eyebrow-coral,
+.kb-modal-eyebrow,
+.kb-detail-eyebrow,
+.hero-badge,
+.kb-contact-badge,
+.kb-careers-badge {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  word-spacing: 0.35em;
+  color: var(--kb-strawberry, #E23A48);
+}
+
+.kb-eyebrow-dark,
+.kb-eyebrow-coral,
+.hero-badge,
+.kb-detail-eyebrow {
+  color: var(--kb-coral, #FF7B88) !important;
+}
+
+/* Global Container Utility — Guarantees proper centering across all screen sizes */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Global Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: clip;
+  max-width: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--kb-font-sans);
+  color: var(--kb-cocoa);
+  background-color: var(--kb-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 /* Global Scrollbar styling */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 transparent;
+  scrollbar-color: var(--kb-sand, #D9C9BC) transparent;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -42,37 +105,21 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 8px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
+  background: var(--kb-sand, #D9C9BC);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #d50703;
-  border: 2px solid transparent;
-  background-clip: padding-box;
+  background: var(--kb-strawberry, #E23A48);
 }
 
-/* Sidebar Custom Scrollbar styling */
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4);
+/* Anchor & Section Sticky Navbar Clearance */
+#about,
+#expertise,
+#presence,
+#blog,
+#technology,
+section[id],
+div[id] {
+  scroll-margin-top: 90px;
 }

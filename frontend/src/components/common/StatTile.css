@@ -1,0 +1,43 @@
+.kb-stat-tile {
+  background-color: var(--kb-cocoa);
+  border: 1px solid var(--kb-hairline-dark);
+  border-radius: var(--kb-radius-md);
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: var(--kb-shadow-sm);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.kb-stat-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(226, 58, 72, 0.4);
+  box-shadow: var(--kb-shadow-md);
+}
+
+.kb-stat-val {
+  font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+  font-weight: 800;
+  color: var(--kb-coral);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+}
+
+.kb-stat-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--kb-white);
+  line-height: 1.4;
+  max-width: 220px;
+}
+
+.kb-stat-subtext {
+  font-size: 0.78rem;
+  color: var(--kb-taupe);
+  margin-top: 0.35rem;
+}
+

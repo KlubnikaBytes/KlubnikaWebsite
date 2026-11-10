@@ -6,15 +6,41 @@ const applicationSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    jobTitle: {
+        type: String,
+        trim: true,
+        default: ''
+    },
     candidate: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: false
     },
     resumeLink: {
         type: String,
-        required: true,
-        trim: true
+        required: false,
+        trim: true,
+        default: ''
+    },
+    resumeFileName: {
+        type: String,
+        default: ''
+    },
+    resumeContentType: {
+        type: String,
+        default: 'application/pdf'
+    },
+    resumeFileSize: {
+        type: Number,
+        default: 0
+    },
+    resumeFilePath: {
+        type: String,
+        default: ''
+    },
+    resumeData: {
+        type: Buffer,
+        select: false
     },
     fullName: {
         type: String,

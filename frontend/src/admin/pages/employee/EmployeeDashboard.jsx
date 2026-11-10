@@ -14,8 +14,8 @@ const EmployeeDashboard = () => {
         const fetchData = async () => {
             try {
                 const [statsRes, refsRes] = await Promise.all([
-                    fetch('/api/admin/dashboard/stats', { headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` } }),
-                    fetch('/api/admin/referrals', { headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` } })
+                    fetch(`${import.meta.env.VITE_API_URL}/api/admin/dashboard/stats`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` } }),
+                    fetch(`${import.meta.env.VITE_API_URL}/api/admin/referrals`, { headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` } })
                 ]);
 
                 setStats(await statsRes.json());
@@ -32,7 +32,7 @@ const EmployeeDashboard = () => {
     const handleReferralSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('/api/admin/referrals', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/referrals`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

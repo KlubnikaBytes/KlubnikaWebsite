@@ -204,11 +204,20 @@ const ApplicationsList = () => {
                                         </h3>
                                         <div className="space-y-4">
                                             <div>
-                                                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Resume</p>
-                                                <a href={selectedApp.resumeLink} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-800 font-bold flex items-center gap-1">
-                                                    View Resume / Portfolio
-                                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                                                </a>
+                                                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Resume &amp; Credentials</p>
+                                                {selectedApp.resumeLink ? (
+                                                    <a 
+                                                        href={selectedApp.resumeLink.startsWith('http') ? selectedApp.resumeLink : `${(import.meta.env.VITE_API_URL || '').replace(/\/+$/, '')}${selectedApp.resumeLink.startsWith('/') ? '' : '/'}${selectedApp.resumeLink}`} 
+                                                        target="_blank" 
+                                                        rel="noopener noreferrer" 
+                                                        className="text-indigo-600 hover:text-indigo-800 font-bold flex items-center gap-1.5 bg-indigo-50 hover:bg-indigo-100 p-2.5 rounded-lg border border-indigo-200 transition-colors w-fit"
+                                                    >
+                                                        <span>📥 Download / View Resume</span>
+                                                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                                    </a>
+                                                ) : (
+                                                    <span className="text-slate-400 text-sm">No resume file attached</span>
+                                                )}
                                             </div>
                                             {selectedApp.referredBy && (
                                                 <div className="bg-emerald-100 border border-emerald-200 p-3 rounded-lg">

@@ -7,6 +7,8 @@ const { sendOTP } = require('../utils/emailService');
 
 const router = express.Router();
 
+const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
 // @route   POST /api/auth/register
 // @desc    Register a user
 router.post('/register', async (req, res) => {
@@ -76,7 +78,8 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password, isTokenLogin } = req.body; // 'email' field in frontend might actually hold Employee ID now
 
-        if (!email) {
+        const loginIdentity = email?.toString().trim();
+        if (!loginIdentity) {
             return res.status(400).json({ status: 'error', message: 'Please enter Email or Employee ID' });
         }
 
@@ -87,9 +90,11 @@ router.post('/login', async (req, res) => {
         const OtpVerification = require('../models/admin/OtpVerification');
         const OnboardingToken = require('../models/admin/OnboardingToken');
         
-        // Search by Employee ID or Email
+        const identityRegex = new RegExp(`^${escapeRegex(loginIdentity)}$`, 'i');
+
+        // Search by Employee ID or Email (case-insensitive)
         const adminUser = await AdminEmployee.findOne({ 
-            $or: [{ employeeId: email }, { email: email }] 
+            $or: [{ employeeId: identityRegex }, { email: identityRegex }] 
         });
 
         if (adminUser) {
@@ -97,32 +102,16 @@ router.post('/login', async (req, res) => {
                 return res.status(403).json({ status: 'error', message: 'Account suspended or inactive' });
             }
 
-            // --- CEO FLOW (OTP) ---
+            // --- CEO FLOW ---
             if (adminUser.role === 'CEO') {
-                const otpCode = crypto.randomInt(100000, 999999).toString();
-                const salt = await bcrypt.genSalt(10);
-                const hashedOtp = await bcrypt.hash(otpCode, salt);
-
-                await OtpVerification.create({
-                    employeeId: adminUser.employeeId,
-                    email: adminUser.email,
-                    otp: hashedOtp,
-                    expiresAt: new Date(Date.now() + 10 * 60 * 1000)
-                });
-
-                if (process.env.EMAIL_USER) {
-                    await sendOTP(adminUser.email, otpCode); // Assuming sendOTP works for CEO too
-                } else {
-                    console.log(`[MOCK EMAIL] OTP for CEO (${adminUser.email}): ${otpCode}`);
-                }
-
-                return res.status(200).json({ 
-                    status: 'success', 
-                    step: 'OTP_REQUIRED', 
-                    message: 'OTP sent to CEO email', 
-                    email: adminUser.email,
+                const authToken = jwt.sign({ id: adminUser._id, role: adminUser.role, userType: 'Admin' }, process.env.JWT_SECRET || 'fallback_secret', { expiresIn: '30d' });
+                return res.status(200).json({
+                    status: 'success',
+                    step: 'LOGIN_SUCCESS',
                     isAdmin: true,
-                    employeeId: adminUser.employeeId 
+                    isCEO: true,
+                    token: authToken,
+                    user: { id: adminUser._id, name: adminUser.name, role: adminUser.role, employeeId: adminUser.employeeId }
                 });
             }
 
@@ -181,7 +170,7 @@ router.post('/login', async (req, res) => {
                 step: 'LOGIN_SUCCESS',
                 isAdmin: true,
                 token: authToken,
-                user: { id: adminUser._id, name: adminUser.name, role: adminUser.role, employeeId: adminUser.employeeId }
+                user: { id: adminUser._id, name: adminUser.name, role: adminUser.role, employeeId: adminUser.employeeId, email: adminUser.email }
             });
         }
 
@@ -192,7 +181,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ status: 'error', message: 'Password is required' });
         }
 
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email: identityRegex });
         if (!user) {
             return res.status(400).json({ status: 'error', message: 'Invalid credentials' });
         }

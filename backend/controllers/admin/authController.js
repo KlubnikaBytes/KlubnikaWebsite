@@ -30,9 +30,13 @@ const adminLogin = async (req, res) => {
     try {
         const { employeeId, password, isTokenLogin } = req.body;
 
-        if (!employeeId) return res.status(400).json({ message: 'Employee ID is required' });
+        if (!employeeId) return res.status(400).json({ message: 'Employee ID or email is required' });
 
-        const employee = await Employee.findOne({ employeeId });
+        const loginQuery = employeeId.trim();
+        const idRegex = new RegExp(`^${loginQuery.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&')}$`, 'i');
+        const employee = await Employee.findOne({
+            $or: [{ employeeId: idRegex }, { email: idRegex }]
+        });
         if (!employee) return res.status(404).json({ message: 'Employee not found' });
 
         if (employee.status !== 'Active' && employee.status !== 'Onboarding') {
@@ -100,7 +104,7 @@ const adminLogin = async (req, res) => {
                 // Continue even if email fails — OTP is still in DB
             }
 
-            return res.status(200).json({ step: 'OTP_REQUIRED', message: 'OTP sent to CEO email', email: employee.email });
+            return res.status(200).json({ status: 'success', step: 'OTP_REQUIRED', message: 'OTP sent to CEO email', email: employee.email, employeeId });
         }
 
         // --- TOKEN / FIRST TIME LOGIN FLOW (HR, Digital Marketing, Employee) ---
@@ -123,6 +127,7 @@ const adminLogin = async (req, res) => {
             const resetToken = jwt.sign({ id: employee._id, role: employee.role, action: 'PASSWORD_SETUP' }, process.env.JWT_SECRET || 'fallback_secret', { expiresIn: '15m' });
 
             return res.status(200).json({ 
+                status: 'success',
                 step: 'SETUP_PASSWORD', 
                 message: 'Token verified. Please set your password.',
                 resetToken,
@@ -151,6 +156,7 @@ const adminLogin = async (req, res) => {
         if (employee.requiresPasswordChange) {
             const resetToken = jwt.sign({ id: employee._id, role: employee.role, action: 'FORCE_PASSWORD_CHANGE' }, process.env.JWT_SECRET || 'fallback_secret', { expiresIn: '15m' });
             return res.status(200).json({
+                status: 'success',
                 step: 'REQUIRE_PASSWORD_CHANGE',
                 message: 'You must change your initial password before continuing.',
                 resetToken,
@@ -161,6 +167,7 @@ const adminLogin = async (req, res) => {
         // Success
         const authToken = generateToken(employee._id, employee.role);
         res.status(200).json({
+            status: 'success',
             step: 'LOGIN_SUCCESS',
             token: authToken,
             user: { id: employee._id, name: employee.name, role: employee.role, employeeId: employee.employeeId }
@@ -206,6 +213,7 @@ const verifyCeoOtp = async (req, res) => {
         });
 
         res.status(200).json({
+            status: 'success',
             step: 'LOGIN_SUCCESS',
             token: authToken,
             user: { id: employee._id, name: employee.name, role: employee.role, employeeId: employee.employeeId }

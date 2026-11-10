@@ -24,7 +24,7 @@ const ApplyLeaveModal = ({ isOpen, onClose, onLeaveApplied }) => {
 
         try {
             const token = localStorage.getItem('adminToken');
-            const res = await fetch('/api/admin/leaves/apply', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/leaves/apply`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

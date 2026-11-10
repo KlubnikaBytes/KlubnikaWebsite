@@ -12,4 +12,17 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Get single job details for application page
+router.get('/:id', async (req, res) => {
+    try {
+        const job = await JobPosting.findById(req.params.id);
+        if (!job) {
+            return res.status(404).json({ error: 'Position not found' });
+        }
+        res.json(job);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;

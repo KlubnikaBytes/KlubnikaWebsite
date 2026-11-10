@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
 import './Auth.css';
 
 const SignupPage = () => {
@@ -92,31 +93,34 @@ const SignupPage = () => {
 
     return (
         <div className="auth-container">
-
             {/* ── Left Brand Panel ── */}
-            <div className="auth-left">
+            <div className="auth-left kb-dot-grid">
+                <div className="auth-brand-top">
+                    <img src={logo} alt="Klubnika Bytes" className="auth-brand-logo" />
+                    <span className="auth-brand-wordmark">Klubnika Bytes</span>
+                </div>
 
                 <div className="auth-hero">
                     <div className="auth-hero-tag">
-                        <span>●</span> Join Us
+                        <span>●</span> Member Registration
                     </div>
-                    <h1>Start Your<br /><span>Journey</span> Today.</h1>
+                    <h1>Join the <span>Next Generation</span> of Digital Delivery.</h1>
                     <p>
-                        Create a free Klubnika Bytes account and get access to
-                        our full suite of digital tools, team collaboration, and more.
+                        Create your verified profile to apply for positions, access candidate status,
+                        and collaborate with our engineering team.
                     </p>
                     <div className="auth-features">
                         <div className="auth-feature-item">
                             <span className="auth-feature-dot" />
-                            Free to get started — no credit card needed
+                            Verified corporate and candidate accounts
                         </div>
                         <div className="auth-feature-item">
                             <span className="auth-feature-dot" />
-                            Email-verified secure accounts
+                            Secure email authentication &amp; OTP
                         </div>
                         <div className="auth-feature-item">
                             <span className="auth-feature-dot" />
-                            Access projects and team tools instantly
+                            Direct candidate application tracking
                         </div>
                     </div>
                 </div>
@@ -130,17 +134,16 @@ const SignupPage = () => {
             <div className="auth-right">
                 <div className="auth-form-wrapper">
 
-                    {/* Step progress bar */}
+                    {/* Step indicator */}
                     <div className="auth-steps">
-                        <span className={`auth-step-dot ${step >= 1 ? 'active' : ''}`} />
-                        <span className={`auth-step-dot ${step >= 2 ? 'active' : ''}`} />
+                        {[1, 2].map((s) => (
+                            <span key={s} className={`auth-step-dot ${step >= s ? 'active' : ''}`} />
+                        ))}
                     </div>
 
                     <h2>{step === 1 ? 'Create Account' : 'Verify Email'}</h2>
                     <p className="auth-subtitle">
-                        {step === 1
-                            ? 'Fill in the details below to get started'
-                            : `We've sent a 6-digit code to ${formData.email}`}
+                        {step === 1 ? 'Fill in your details to create a member profile' : 'Enter the 6-digit code sent to your email'}
                     </p>
 
                     {error && <div className="auth-error">⚠ {error}</div>}
@@ -156,7 +159,7 @@ const SignupPage = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
-                                    placeholder="John Doe"
+                                    placeholder="e.g. John Doe"
                                 />
                             </div>
                             <div className="input-group">
@@ -178,7 +181,8 @@ const SignupPage = () => {
                                     value={formData.password}
                                     onChange={handleChange}
                                     required
-                                    placeholder="Min 8 characters"
+                                    placeholder="Minimum 8 characters"
+                                    minLength="8"
                                 />
                             </div>
                             <div className="input-group">
@@ -189,29 +193,29 @@ const SignupPage = () => {
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
                                     required
-                                    placeholder="••••••••"
+                                    placeholder="Re-enter password"
                                 />
                             </div>
                             <button type="submit" className="auth-btn">Create Account →</button>
                         </form>
                     )}
 
-                    {/* Step 2 — OTP */}
+                    {/* Step 2 — OTP Verification */}
                     {step === 2 && (
                         <form onSubmit={handleOtpSubmit} className="auth-form">
                             <div className="input-group">
-                                <label>6-digit OTP Code</label>
+                                <label>6-digit OTP Code (sent to {formData.email})</label>
                                 <input
                                     type="text"
                                     name="otp"
                                     value={formData.otp}
                                     onChange={handleChange}
                                     required
-                                    placeholder="Enter code"
+                                    placeholder="Enter 6-digit code"
                                     maxLength="6"
                                 />
                             </div>
-                            <button type="submit" className="auth-btn">Verify &amp; Continue →</button>
+                            <button type="submit" className="auth-btn">Verify &amp; Activate Account →</button>
                             <div className="otp-timer">
                                 {timer > 0 ? (
                                     <span>Resend code in <strong>{timer}s</strong></span>
@@ -224,9 +228,11 @@ const SignupPage = () => {
                         </form>
                     )}
 
-                    <div className="auth-footer">
-                        <p>Already have an account? <Link to="/login">Sign in</Link></p>
-                    </div>
+                    {step === 1 && (
+                        <div className="auth-footer">
+                            <p>Already have an account? <Link to="/login">Sign In</Link></p>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

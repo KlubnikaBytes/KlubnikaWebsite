@@ -1,0 +1,24 @@
+.kb-ribbon-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 140px;
+  height: 140px;
+  pointer-events: none;
+  z-index: 5;
+  overflow: hidden;
+}
+
+.kb-ribbon-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .kb-ribbon-corner {
+    width: 90px;
+    height: 90px;
+  }
+}
+

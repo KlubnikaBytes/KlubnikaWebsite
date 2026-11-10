@@ -1,0 +1,405 @@
+/* ==========================================================================
+   KLUBINIKA BYTES — GLOBAL PRESENCE & DELIVERY NETWORK STYLES
+   ========================================================================== */
+
+.kb-presence-section {
+  padding: 6rem 0;
+  background-color: var(--kb-white, #FFFFFF);
+  position: relative;
+}
+
+/* 4 Metric Tiles Row */
+.kb-presence-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+  width: 100%;
+}
+
+.kb-presence-metric-card {
+  background-color: var(--kb-cream, #F8F1E9);
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.kb-presence-metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(50, 32, 27, 0.08);
+  border-color: var(--kb-strawberry, #E23A48);
+}
+
+.kb-metric-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--kb-strawberry, #E23A48);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.kb-metric-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--kb-cocoa, #3D2B24);
+}
+
+/* --------------------------------------------------------------------------
+   5 Delivery Network Cards
+   -------------------------------------------------------------------------- */
+.kb-locations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-bottom: 4rem;
+  width: 100%;
+}
+
+.kb-location-card {
+  background: #FFFFFF;
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.kb-location-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(50, 32, 27, 0.09);
+}
+
+.kb-location-card-primary {
+  grid-column: span 2;
+  border-left: 5px solid var(--kb-strawberry, #E23A48);
+  background-color: var(--kb-cream, #F8F1E9);
+}
+
+.kb-loc-header {
+  margin-bottom: 0.85rem;
+}
+
+.kb-loc-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  flex-wrap: wrap;
+}
+
+.kb-loc-type-label {
+  color: var(--kb-strawberry, #E23A48);
+}
+
+.kb-loc-type-label.primary {
+  color: var(--kb-strawberry, #E23A48);
+}
+
+.kb-loc-sep {
+  color: var(--kb-sand, #D9C9BC);
+}
+
+.kb-loc-country-label {
+  color: var(--kb-text-muted, #6B5750);
+}
+
+.kb-loc-city {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--kb-cocoa, #3D2B24);
+  margin: 0 0 0.5rem;
+}
+
+.kb-loc-address {
+  font-size: 0.9rem;
+  color: var(--kb-text-muted, #6B5750);
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+.kb-loc-desc {
+  font-size: 0.95rem;
+  color: var(--kb-cocoa, #3D2B24);
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+  flex-grow: 1;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.kb-loc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.kb-loc-chip {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--kb-cocoa, #3D2B24);
+  background-color: rgba(61, 43, 36, 0.06);
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+}
+
+.kb-loc-primary-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--kb-sand, #E5E7EB);
+}
+
+.kb-btn-maps-link {
+  display: inline-block;
+  color: var(--kb-strawberry, #E23A48);
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+}
+
+.kb-btn-maps-link:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Kolkata Google Map Card
+   -------------------------------------------------------------------------- */
+.kb-hq-map-wrapper {
+  background: #FFFFFF;
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  width: 100%;
+}
+
+.kb-hq-map-header {
+  padding: 2.25rem 2.5rem;
+  background-color: var(--kb-cream, #F8F1E9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  border-bottom: 1px solid var(--kb-sand, #E5E7EB);
+}
+
+.kb-hq-sub {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--kb-strawberry, #E23A48);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.kb-hq-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--kb-cocoa, #3D2B24);
+  margin: 0 0 0.5rem;
+}
+
+.kb-hq-desc {
+  font-size: 0.95rem;
+  color: var(--kb-text-muted, #6B5750);
+  margin: 0;
+  max-width: 620px;
+  line-height: 1.55;
+}
+
+.kb-hq-actions {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.kb-btn-hq-primary {
+  background-color: var(--kb-strawberry, #E23A48);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(226, 58, 72, 0.25);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.kb-btn-hq-primary:hover {
+  background-color: var(--kb-strawberry-hover, #C92F3D);
+  transform: translateY(-1px);
+}
+
+.kb-btn-hq-secondary {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--kb-cocoa, #3D2B24);
+  color: var(--kb-cocoa, #3D2B24);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.kb-btn-hq-secondary:hover {
+  background-color: var(--kb-cocoa, #3D2B24);
+  color: #FFFFFF;
+}
+
+.kb-hq-split-content {
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  min-height: 420px;
+  background-color: var(--kb-espresso, #32201B);
+}
+
+.kb-hq-photo-side {
+  position: relative;
+  overflow: hidden;
+  min-height: 380px;
+  background-color: var(--kb-espresso, #32201B);
+}
+
+.kb-hq-building-image {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+.kb-hq-photo-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1.75rem;
+  background: linear-gradient(to top, rgba(26, 17, 14, 0.92) 0%, rgba(26, 17, 14, 0.45) 70%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.kb-hq-photo-badge {
+  color: #FFFFFF;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.kb-hq-photo-landmark {
+  color: var(--kb-sand, #D9C9BC);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.kb-hq-map-side {
+  width: 100%;
+  min-height: 380px;
+  line-height: 0;
+}
+
+.kb-hq-map-side iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  display: block;
+}
+
+.kb-hq-iframe-container {
+  width: 100%;
+  line-height: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .kb-locations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kb-location-card-primary {
+    grid-column: span 2;
+  }
+
+  .kb-presence-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .kb-hq-map-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .kb-hq-split-content {
+    grid-template-columns: 1fr;
+  }
+
+  .kb-hq-photo-side {
+    min-height: 260px;
+    max-height: 300px;
+  }
+
+  .kb-hq-building-image {
+    min-height: 260px;
+    max-height: 300px;
+  }
+
+  .kb-hq-map-side {
+    min-height: 320px;
+  }
+
+  .kb-hq-map-side iframe {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 640px) {
+  .kb-presence-section {
+    padding: 4rem 0;
+  }
+
+  .kb-locations-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .kb-location-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .kb-location-card-primary {
+    grid-column: span 1;
+  }
+
+  .kb-presence-metrics-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .kb-hq-map-header {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .kb-hq-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .kb-btn-hq-primary,
+  .kb-btn-hq-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}

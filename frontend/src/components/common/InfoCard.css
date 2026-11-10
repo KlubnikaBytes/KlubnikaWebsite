@@ -1,0 +1,76 @@
+.kb-info-card {
+  background-color: var(--kb-cream);
+  border-left: 4px solid var(--kb-strawberry);
+  border-radius: 0 var(--kb-radius-md) var(--kb-radius-md) 0;
+  padding: 1.75rem 2rem;
+  box-shadow: var(--kb-shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-left-color 0.25s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.kb-info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kb-shadow-md);
+  border-left-color: var(--kb-strawberry-hover);
+}
+
+.kb-info-card-clickable {
+  cursor: pointer;
+}
+
+.kb-info-card-num {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--kb-strawberry);
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  letter-spacing: 0.05em;
+}
+
+.kb-info-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--kb-cocoa);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.35;
+}
+
+.kb-info-card-content {
+  color: var(--kb-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.kb-info-card-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0 0 0;
+}
+
+.kb-info-card-content li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--kb-cocoa);
+  font-size: 0.94rem;
+}
+
+.kb-info-card-content li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--kb-strawberry);
+}
+
+@media (max-width: 600px) {
+  .kb-info-card {
+    padding: 1.5rem 1.25rem;
+  }
+}
+

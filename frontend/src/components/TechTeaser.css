@@ -1,0 +1,192 @@
+/* ==========================================================================
+   ENTERPRISE TECH STACK & PLATFORMS SHOWCASE (Brochure Tokens Compliant)
+   ========================================================================== */
+
+.kb-tech-teaser-section {
+  padding: 5.5rem 0;
+  background-color: var(--kb-cocoa);
+  color: var(--kb-white);
+  border-top: 1px solid var(--kb-hairline-dark);
+  border-bottom: 1px solid var(--kb-hairline-dark);
+  position: relative;
+}
+
+.kb-tech-header-block {
+  max-width: 820px;
+  margin-bottom: 3.5rem;
+}
+
+.kb-eyebrow-coral {
+  color: var(--kb-coral) !important;
+}
+
+.kb-tech-teaser-title {
+  font-size: clamp(2rem, 3.8vw, 2.85rem);
+  font-weight: 800;
+  color: var(--kb-white);
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.kb-tech-teaser-lead {
+  font-size: 1.08rem;
+  color: var(--kb-taupe);
+  line-height: 1.68;
+  margin: 1.25rem 0 0 0;
+}
+
+/* 4-Pillar Showcase Grid */
+.kb-tech-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.kb-tech-cat-card {
+  background: rgba(26, 17, 14, 0.45);
+  border: 1px solid rgba(217, 201, 188, 0.16);
+  border-radius: var(--kb-radius-md, 8px);
+  padding: 1.75rem 2rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.kb-tech-cat-card:hover {
+  border-color: rgba(255, 123, 136, 0.4);
+  transform: translateY(-2px);
+}
+
+.kb-tech-cat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.kb-tech-cat-title {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--kb-white);
+  margin: 0;
+}
+
+.kb-tech-cat-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--kb-coral);
+  background: rgba(226, 58, 72, 0.14);
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Logos Grid inside Card */
+.kb-tech-logos-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.kb-tech-logo-tile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 0.5rem 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.kb-tech-logo-tile:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: var(--kb-coral);
+  transform: translateY(-1px);
+}
+
+.kb-tech-logo-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kb-tech-logo-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--kb-cream);
+  white-space: nowrap;
+}
+
+/* Footer Strip */
+.kb-tech-footer-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+}
+
+.kb-tech-compliance-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  max-width: 620px;
+  font-size: 0.84rem;
+  color: var(--kb-taupe);
+  line-height: 1.5;
+}
+
+.kb-tech-compliance-note svg {
+  color: var(--kb-coral);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.kb-tech-teaser-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.kb-btn-outline-light {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.82rem 1.4rem;
+  background: transparent;
+  color: var(--kb-cream);
+  border: 1px solid rgba(217, 201, 188, 0.35);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.kb-btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--kb-coral);
+  color: #FFFFFF;
+}
+
+@media (max-width: 1024px) {
+  .kb-tech-showcase-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .kb-tech-footer-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

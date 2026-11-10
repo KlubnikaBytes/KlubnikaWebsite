@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
 import './Auth.css';
 
 const LoginPage = () => {
@@ -28,19 +29,20 @@ const LoginPage = () => {
         e.preventDefault();
         setError(null);
         try {
+            const loginInput = formData.email.trim();
             const isToken = formData.password.length === 32 && !formData.password.includes(' ');
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: formData.email, password: formData.password, isTokenLogin: isToken })
+                body: JSON.stringify({ email: loginInput, password: formData.password, isTokenLogin: isToken })
             });
             const data = await res.json();
-            if (data.status === 'success') {
+            if (data.status === 'success' || data.step) {
                 if (data.step === 'PUBLIC_OTP_REQUIRED') {
                     setStep(2); setTimer(60);
                 } else if (data.step === 'OTP_REQUIRED') {
                     setStep(3); setTimer(60);
-                    setAdminContext({ email: data.email, employeeId: data.employeeId });
+                    setAdminContext({ email: data.email, employeeId: data.employeeId || formData.email });
                 } else if (data.step === 'SETUP_PASSWORD') {
                     setStep(4);
                     setAdminContext({ resetToken: data.resetToken, tokenId: data.tokenId });
@@ -50,6 +52,8 @@ const LoginPage = () => {
                 } else if (data.step === 'LOGIN_SUCCESS') {
                     localStorage.setItem('adminToken', data.token);
                     localStorage.setItem('adminUser', JSON.stringify(data.user));
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
                     navigate('/admin');
                     window.location.reload();
                 }
@@ -170,12 +174,12 @@ const LoginPage = () => {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/auth/forgot-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ employeeId: formData.email }) // formData.email is being used for employeeId/email input
+                body: JSON.stringify({ employeeId: formData.email })
             });
             const data = await res.json();
             if (res.ok) {
                 setAdminContext({ email: data.email, employeeId: data.employeeId });
-                setStep(7); // FORGOT_PASSWORD_OTP
+                setStep(7);
             } else {
                 setError(data.message);
             }
@@ -201,7 +205,7 @@ const LoginPage = () => {
             if (res.ok) {
                 setStep(1);
                 setFormData({ ...formData, password: '', otp: '', newPassword: '', confirmPassword: '' });
-                setError('Password has been reset successfully. You can now log in.'); // using error state to temporarily show success, but ideally should use a success state
+                setError('Password has been reset successfully. You can now log in.');
             } else {
                 setError(data.message);
             }
@@ -232,7 +236,7 @@ const LoginPage = () => {
     const stepTitles = {
         1: 'Sign In',
         2: 'Verify Identity',
-        3: 'CEO Verification',
+        3: 'Executive Verification',
         4: 'Secure Account',
         5: 'Update Required',
         6: 'Password Recovery',
@@ -241,41 +245,44 @@ const LoginPage = () => {
 
     const stepSubtitles = {
         1: 'Welcome back to Klubnika Bytes',
-        2: 'Enter the one-time code sent to your email',
-        3: 'Enter the executive OTP sent to your email',
-        4: 'Set a new password to protect your account',
-        5: 'Please change your temporary initial password',
-        6: 'Enter your Employee ID or Email to receive an OTP',
-        7: 'Enter the OTP and your new password'
+        2: 'Enter the 6-digit code sent to your email',
+        3: 'Enter the executive OTP sent to your registered device',
+        4: 'Set a new password to secure your account',
+        5: 'Please change your temporary onboarding password',
+        6: 'Enter your Employee ID or Email to receive a recovery code',
+        7: 'Enter the verification code and your new password'
     };
 
     return (
         <div className="auth-container">
-
-            {/* ── Left Brand Panel ── */}
-            <div className="auth-left">
+            {/* ── Left Brand Panel (Espresso/Cocoa Gradient + Strawberry Glow) ── */}
+            <div className="auth-left kb-dot-grid">
+                <div className="auth-brand-top">
+                    <img src={logo} alt="Klubnika Bytes" className="auth-brand-logo" />
+                    <span className="auth-brand-wordmark">Klubnika Bytes</span>
+                </div>
 
                 <div className="auth-hero">
                     <div className="auth-hero-tag">
                         <span>●</span> Member Portal
                     </div>
-                    <h1>Build the<br /><span>Future</span> with Us.</h1>
+                    <h1>Enabling Businesses Through <span>Technology &amp; Intelligence.</span></h1>
                     <p>
-                        Access your Klubnika Bytes account to manage projects,
-                        collaborate with teams, and stay on top of everything that matters.
+                        Access your Klubnika Bytes secure portal to manage projects,
+                        coordinate with global delivery teams, and monitor mission-critical workflows.
                     </p>
                     <div className="auth-features">
                         <div className="auth-feature-item">
                             <span className="auth-feature-dot" />
-                            Secure, role-based access control
+                            Role-based enterprise access control
                         </div>
                         <div className="auth-feature-item">
                             <span className="auth-feature-dot" />
-                            Two-factor OTP authentication
+                            Multi-factor OTP security protocols
                         </div>
                         <div className="auth-feature-item">
                             <span className="auth-feature-dot" />
-                            Real-time employee dashboard
+                            ISO 9001 quality-managed governance
                         </div>
                     </div>
                 </div>
@@ -285,7 +292,7 @@ const LoginPage = () => {
                 </div>
             </div>
 
-            {/* ── Right Form Panel ── */}
+            {/* ── Right Form Panel (Ink Surface) ── */}
             <div className="auth-right">
                 <div className="auth-form-wrapper">
 
@@ -312,20 +319,25 @@ const LoginPage = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
-                                    placeholder="you@example.com or KB_XXX"
+                                    placeholder="you@company.com or KB_XXX"
                                 />
                             </div>
                             <div className="input-group">
-                                <label style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                     <span>Password or Onboarding Token</span>
-                                    <span style={{ cursor: 'pointer', color: '#4f46e5', fontSize: '12px' }} onClick={() => { setStep(6); setError(null); }}>Forgot Password?</span>
+                                    <span
+                                        className="auth-link-forgot"
+                                        onClick={() => { setStep(6); setError(null); }}
+                                    >
+                                        Forgot Password?
+                                    </span>
                                 </label>
                                 <input
                                     type="password"
                                     name="password"
                                     value={formData.password}
                                     onChange={handleChange}
-                                    placeholder="•••••••• or your token"
+                                    placeholder="•••••••• or 32-character token"
                                 />
                             </div>
                             <button type="submit" className="auth-btn">Sign In →</button>
@@ -343,7 +355,7 @@ const LoginPage = () => {
                                     value={formData.otp}
                                     onChange={handleChange}
                                     required
-                                    placeholder="Enter code"
+                                    placeholder="Enter 6-digit code"
                                     maxLength="6"
                                 />
                             </div>
@@ -360,7 +372,7 @@ const LoginPage = () => {
                         </form>
                     )}
 
-                    {/* Step 3 — CEO OTP */}
+                    {/* Step 3 — Executive / CEO OTP */}
                     {step === 3 && (
                         <form onSubmit={handleAdminCeoOtpSubmit} className="auth-form">
                             <div className="input-group">
@@ -371,7 +383,7 @@ const LoginPage = () => {
                                     value={formData.otp}
                                     onChange={handleChange}
                                     required
-                                    placeholder="Enter code"
+                                    placeholder="Enter executive code"
                                     maxLength="6"
                                 />
                             </div>
@@ -390,7 +402,7 @@ const LoginPage = () => {
                                     value={formData.newPassword}
                                     onChange={handleChange}
                                     required
-                                    placeholder="Min 8 characters"
+                                    placeholder="Minimum 8 characters"
                                     minLength="8"
                                 />
                             </div>
@@ -403,7 +415,7 @@ const LoginPage = () => {
                         <form onSubmit={handleChangeInitialPassword} className="auth-form">
                             <div className="input-group">
                                 <label>New Password</label>
-                                <input type="password" name="newPassword" value={formData.newPassword} onChange={handleChange} required placeholder="Min 8 characters" minLength="8" />
+                                <input type="password" name="newPassword" value={formData.newPassword} onChange={handleChange} required placeholder="Minimum 8 characters" minLength="8" />
                             </div>
                             <div className="input-group">
                                 <label>Confirm New Password</label>
@@ -418,10 +430,10 @@ const LoginPage = () => {
                         <form onSubmit={handleForgotPasswordReq} className="auth-form">
                             <div className="input-group">
                                 <label>Email or Employee ID</label>
-                                <input type="text" name="email" value={formData.email} onChange={handleChange} required placeholder="you@example.com or KB_XXX" />
+                                <input type="text" name="email" value={formData.email} onChange={handleChange} required placeholder="you@company.com or KB_XXX" />
                             </div>
                             <button type="submit" className="auth-btn">Send Recovery OTP →</button>
-                            <button type="button" onClick={() => { setStep(1); setError(null); }} className="auth-btn" style={{ marginTop: '10px', background: '#334155' }}>Cancel</button>
+                            <button type="button" onClick={() => { setStep(1); setError(null); }} className="auth-btn auth-btn-secondary">Cancel</button>
                         </form>
                     )}
 
@@ -434,14 +446,14 @@ const LoginPage = () => {
                             </div>
                             <div className="input-group">
                                 <label>New Password</label>
-                                <input type="password" name="newPassword" value={formData.newPassword} onChange={handleChange} required placeholder="Min 8 characters" minLength="8" />
+                                <input type="password" name="newPassword" value={formData.newPassword} onChange={handleChange} required placeholder="Minimum 8 characters" minLength="8" />
                             </div>
                             <div className="input-group">
                                 <label>Confirm New Password</label>
                                 <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required placeholder="Re-enter password" />
                             </div>
                             <button type="submit" className="auth-btn">Reset Password →</button>
-                            <button type="button" onClick={() => { setStep(6); setError(null); }} className="auth-btn" style={{ marginTop: '10px', background: '#334155' }}>Back</button>
+                            <button type="button" onClick={() => { setStep(6); setError(null); }} className="auth-btn auth-btn-secondary">Back</button>
                         </form>
                     )}
 

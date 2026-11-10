@@ -1,140 +1,262 @@
-.careers-page {
-    padding-top: 120px;
-    padding-bottom: 80px;
-    background-color: #f8fafc;
-    /* Very light slate background */
-    min-height: 80vh;
+/* ==========================================================================
+   KLUBINIKA BYTES — CAREERS PAGE STYLES (Design Tokens Compliant)
+   ========================================================================== */
+
+.kb-careers-page {
+  background-color: var(--kb-white);
+  padding-top: 80px;
+  min-height: 100vh;
 }
 
-.careers-container {
-    max-width: 1000px;
-    margin: 0 auto;
+/* Cover Hero Banner */
+.kb-careers-hero {
+  position: relative;
+  background: linear-gradient(135deg, var(--kb-ink) 0%, var(--kb-espresso) 50%, var(--kb-cocoa) 100%);
+  color: var(--kb-white);
+  padding: 5rem 0 5.5rem;
+  overflow: hidden;
+  text-align: center;
 }
 
-.careers-header {
-    text-align: center;
-    margin-bottom: 4rem;
+.kb-careers-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
-.careers-header h1 {
-    font-size: 2.5rem;
-    color: #0f172a;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
+.kb-careers-hero-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 800;
+  color: var(--kb-white);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
 }
 
-.careers-header p {
-    color: #64748b;
-    font-size: 1.1rem;
+.kb-careers-hero-lead {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--kb-sand);
+  max-width: 700px;
+  margin: 0 auto;
 }
 
-.job-listing-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 3rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    border: 1px solid #f1f5f9;
+/* Listings Section */
+.kb-careers-list-section {
+  padding: 5.5rem 0 6rem;
+  background-color: var(--kb-cream);
 }
 
-.job-header {
-    margin-bottom: 1.5rem;
+.kb-careers-container {
+  max-width: 960px;
+  margin: 0 auto;
 }
 
-.job-header h2 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 0.8rem;
+.kb-jobs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-top: 2rem;
 }
 
-.job-meta {
-    display: flex;
-    gap: 1.5rem;
-    color: #64748b;
-    font-size: 0.9rem;
+/* Loading & Empty States */
+.kb-jobs-loading,
+.kb-jobs-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--kb-white);
+  border-radius: var(--kb-radius-md);
+  border: 1px solid var(--kb-sand);
+  color: var(--kb-text-muted);
 }
 
-.meta-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
+.kb-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--kb-sand);
+  border-top-color: var(--kb-strawberry);
+  border-radius: 50%;
+  animation: kbSpin 0.8s linear infinite;
+  margin: 0 auto 1.25rem;
 }
 
-.job-description {
-    color: #475569;
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
+@keyframes kbSpin {
+  to { transform: rotate(360deg); }
 }
 
-.job-details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
+.kb-jobs-empty h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--kb-cocoa);
+  margin-bottom: 0.75rem;
 }
 
-.details-column h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #0f172a;
-    margin-bottom: 1.5rem;
+.kb-jobs-empty a {
+  color: var(--kb-strawberry);
+  font-weight: 700;
+  text-decoration: underline;
 }
 
-.details-column ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* Job Listing Card */
+.kb-job-card {
+  background-color: var(--kb-white);
+  border-radius: var(--kb-radius-md);
+  padding: 3rem;
+  border: 1px solid var(--kb-sand);
+  border-left: 5px solid var(--kb-strawberry);
+  box-shadow: var(--kb-shadow-sm);
+  transition: transform var(--kb-transition), box-shadow var(--kb-transition);
 }
 
-.details-column ul li {
-    position: relative;
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-    color: #475569;
-    line-height: 1.6;
+.kb-job-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kb-shadow-md);
 }
 
-/* Custom bullet points resembling the reference */
-.details-column ul li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: #4285F4;
+.kb-job-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1.5rem;
 }
 
-.apply-section {
-    text-align: center;
-    margin-top: 2rem;
+.kb-job-id-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--kb-strawberry);
+  margin-bottom: 0.4rem;
 }
 
-.btn-apply {
-    background-color: #0f172a;
-    color: white;
-    padding: 0.8rem 2.5rem;
-    font-weight: 600;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    border: none;
-    cursor: pointer;
-    font-size: 1.05rem;
+.kb-job-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--kb-cocoa);
+  line-height: 1.25;
+  margin: 0;
 }
 
-.btn-apply:hover {
-    background-color: #1e293b;
-    transform: translateY(-2px);
+.kb-job-meta {
+  display: flex;
+  gap: 1.25rem;
+  flex-shrink: 0;
 }
 
+.kb-job-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--kb-text-muted);
+  background: var(--kb-cream);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--kb-radius-sm);
+  border: 1px solid var(--kb-sand);
+}
+
+.kb-job-description {
+  color: var(--kb-text-muted);
+  line-height: 1.7;
+  font-size: 1rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--kb-cream-deep);
+  padding-bottom: 1.5rem;
+}
+
+/* Grid for Requirements and Benefits */
+.kb-job-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--kb-cream-deep);
+  padding-bottom: 1.75rem;
+}
+
+.kb-column-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--kb-cocoa);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.kb-job-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.kb-job-bullets li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 0.85rem;
+  color: var(--kb-cocoa);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.kb-job-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--kb-strawberry);
+}
+
+/* Card Footer */
+.kb-job-card-footer {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 0.25rem;
+}
+
+.kb-apply-btn {
+  font-size: 0.98rem;
+  padding: 0.8rem 2rem;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .job-listing-card {
-        padding: 2rem;
-    }
+  .kb-job-card {
+    padding: 2rem 1.5rem;
+  }
 
-    .job-details-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
+  .kb-job-card-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .kb-job-meta {
+    flex-wrap: wrap;
+  }
+
+  .kb-job-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .kb-apply-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 540px) {
+  .kb-careers-hero {
+    padding: 3.5rem 0 4rem;
+  }
+  .kb-careers-list-section {
+    padding: 3.5rem 0 4.5rem;
+  }
+  .kb-job-card {
+    padding: 1.5rem 1.15rem;
+  }
 }

@@ -1,0 +1,88 @@
+/* ==========================================================================
+   DIFFERENTIATORS SECTION — 14 PROVEN ADVANTAGES
+   ========================================================================== */
+
+.kb-diff-section {
+  padding: 6rem 0;
+  background-color: var(--kb-white);
+}
+
+.kb-diff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.kb-diff-card {
+  background-color: var(--kb-cream);
+  border-left: 4px solid var(--kb-strawberry);
+  border-radius: 0 var(--kb-radius-md) var(--kb-radius-md) 0;
+  padding: 2.25rem 2.25rem;
+  box-shadow: var(--kb-shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.kb-diff-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--kb-shadow-md);
+  border-left-color: var(--kb-strawberry-hover);
+}
+
+.kb-diff-top {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.kb-diff-num {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--kb-coral);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.kb-diff-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--kb-cocoa);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.kb-diff-text {
+  font-size: 0.96rem;
+  color: var(--kb-text-muted);
+  line-height: 1.68;
+  margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.kb-diff-action-wrap {
+  text-align: center;
+  margin-top: 3.5rem;
+}
+
+@media (max-width: 900px) {
+  .kb-diff-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .kb-diff-section {
+    padding: 4rem 0;
+  }
+  .kb-diff-card {
+    padding: 1.75rem 1.25rem;
+  }
+  .kb-diff-title {
+    font-size: 1.15rem;
+  }
+}
+

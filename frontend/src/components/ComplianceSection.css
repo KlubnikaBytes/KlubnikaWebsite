@@ -1,0 +1,147 @@
+/* ==========================================================================
+   KLUBINIKA BYTES — COMPLIANCE SECTION (Enlarged Centered Badges)
+   ========================================================================== */
+
+.kb-compliance-section {
+  padding: 6rem 0;
+  background-color: var(--kb-cream, #F8F1E9);
+  border-top: 1px solid var(--kb-sand, #E5E7EB);
+}
+
+.kb-compliance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+  width: 100%;
+}
+
+.kb-compliance-card {
+  background-color: #FFFFFF;
+  border-radius: 14px;
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  border-left: 4px solid var(--kb-strawberry, #E23A48);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-left-color 0.25s ease;
+}
+
+.kb-compliance-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(50, 32, 27, 0.1);
+  border-left-color: var(--kb-strawberry-hover, #C92F3D);
+}
+
+/* Prominent Authentic Certification Seal */
+.kb-compliance-badge-wrapper {
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+
+.kb-compliance-badge-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.kb-compliance-card:hover .kb-compliance-badge-wrapper {
+  transform: scale(1.08) translateY(-3px);
+  filter: drop-shadow(0 8px 20px rgba(226, 58, 72, 0.22));
+}
+
+/* Crisp Badge Code Pill */
+.kb-compliance-code-pill {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--kb-cocoa, #3D2B24);
+  background-color: var(--kb-cream-deep, #F3E9DF);
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  margin-bottom: 1.15rem;
+  text-transform: uppercase;
+}
+
+.kb-compliance-text-block {
+  flex: 1;
+}
+
+.kb-compliance-card-title {
+  font-size: 1.28rem;
+  font-weight: 800;
+  color: var(--kb-cocoa, #3D2B24);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.35;
+}
+
+.kb-compliance-card-desc {
+  font-size: 0.95rem;
+  color: var(--kb-text-muted, #6B5750);
+  line-height: 1.65;
+  margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Footer Note */
+.kb-compliance-footer-note {
+  margin-top: 3.5rem;
+  padding: 1.25rem 2rem;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  border: 1px solid var(--kb-sand, #E5E7EB);
+  border-left: 4px solid var(--kb-cocoa, #3D2B24);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.92rem;
+  color: var(--kb-text-muted, #6B5750);
+  line-height: 1.6;
+}
+
+.kb-compliance-footer-note svg {
+  color: var(--kb-strawberry, #E23A48);
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .kb-compliance-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .kb-compliance-section {
+    padding: 4rem 0;
+  }
+
+  .kb-compliance-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .kb-compliance-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .kb-compliance-footer-note {
+    padding: 1.25rem 1.15rem;
+    align-items: flex-start;
+  }
+}

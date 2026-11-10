@@ -21,8 +21,8 @@ const PerformanceReview = () => {
     const fetchData = async () => {
         try {
             const [appRes, empRes] = await Promise.all([
-                fetch('/api/admin/performance', { headers: { Authorization: `Bearer ${token}` } }),
-                fetch('/api/admin/hr/employees', { headers: { Authorization: `Bearer ${token}` } })
+                fetch(`${import.meta.env.VITE_API_URL}/api/admin/performance`, { headers: { Authorization: `Bearer ${token}` } }),
+                fetch(`${import.meta.env.VITE_API_URL}/api/admin/hr/employees`, { headers: { Authorization: `Bearer ${token}` } })
             ]);
             
             if (appRes.ok) setAppraisals(await appRes.json());
@@ -42,7 +42,7 @@ const PerformanceReview = () => {
     const handleCreateReview = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('/api/admin/performance', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/performance`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

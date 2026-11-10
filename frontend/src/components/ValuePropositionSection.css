@@ -1,0 +1,91 @@
+/* ==========================================================================
+   VALUE PROPOSITION — TECHNOLOGY, PEOPLE & PROCESS
+   ========================================================================== */
+
+.kb-value-prop-section {
+  padding: 6rem 0 0 0;
+  background-color: var(--kb-cream);
+  border-top: 1px solid var(--kb-sand);
+}
+
+.kb-principles-list {
+  max-width: 960px;
+  margin: 3.5rem auto 5rem auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.kb-principle-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2.5rem;
+  padding: 2.25rem 0;
+  border-bottom: 1px solid var(--kb-sand);
+  transition: transform 0.2s ease;
+}
+
+.kb-principle-row:first-child {
+  border-top: 1px solid var(--kb-sand);
+}
+
+.kb-principle-row:hover {
+  transform: translateX(8px);
+}
+
+.kb-principle-num {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--kb-strawberry);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  flex-shrink: 0;
+  min-width: 50px;
+}
+
+.kb-principle-content {
+  flex: 1;
+}
+
+.kb-principle-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--kb-cocoa);
+  margin: 0 0 0.4rem 0;
+}
+
+.kb-principle-text {
+  font-size: 1.02rem;
+  color: var(--kb-text-muted);
+  line-height: 1.6;
+  margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Full-width Cocoa Closing Banner */
+.kb-value-prop-banner {
+  background-color: var(--kb-cocoa);
+  color: var(--kb-white);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid var(--kb-hairline-dark);
+}
+
+.kb-banner-statement {
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  font-weight: 800;
+  color: var(--kb-white);
+  max-width: 920px;
+  margin: 0 auto;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+  .kb-principle-row {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.75rem 0;
+  }
+}
+

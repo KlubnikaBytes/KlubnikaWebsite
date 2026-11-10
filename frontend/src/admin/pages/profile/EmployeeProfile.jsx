@@ -24,7 +24,7 @@ const EmployeeProfile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const res = await fetch('/api/admin/hr/profile/me', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/hr/profile/me`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
@@ -55,7 +55,7 @@ const EmployeeProfile = () => {
         setSuccess('');
         setError('');
         try {
-            const res = await fetch('/api/admin/hr/profile/me', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/hr/profile/me`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

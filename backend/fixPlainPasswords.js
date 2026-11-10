@@ -4,9 +4,10 @@
  * Run: node fixPlainPasswords.js
  */
 
+require('dotenv').config();
 const mongoose = require('mongoose');
 
-const MONGO_URI = 'mongodb+srv://klubnikabytes_db_user:ajZRuMUVF4c5asYQ@cluster0.kznlmrn.mongodb.net/?appName=Cluster0';
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb+srv://klubnikabytes_db_user:YniPlOoIF5KFy11I@cluster0.6klvyl4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 const DEFAULT_PLAIN_PASSWORD = 'Welcome@123';
 
 const employeeSchema = new mongoose.Schema({

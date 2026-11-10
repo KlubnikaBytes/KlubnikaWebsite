@@ -262,7 +262,19 @@ const ApplyPage = () => {
         body: submitData
       });
 
-      let data = await response.json();
+      if (response.status === 413) {
+        setError('The uploaded resume file exceeds the maximum allowed server upload size. Please upload a PDF under 10MB.');
+        setLoading(false);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      let data = {};
+      try {
+        data = await response.json();
+      } catch (jsonErr) {
+        data = { message: 'Server returned an invalid response format.' };
+      }
 
       // If backend rejects due to a stale/invalid token in localStorage, auto-retry cleanly without headers
       if (!response.ok && (response.status === 401 || data.message?.toLowerCase().includes('token'))) {
@@ -271,7 +283,17 @@ const ApplyPage = () => {
           method: 'POST',
           body: submitData
         });
-        data = await response.json();
+        if (response.status === 413) {
+          setError('The uploaded resume file exceeds the maximum allowed server upload size. Please upload a PDF under 10MB.');
+          setLoading(false);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        try {
+          data = await response.json();
+        } catch (jsonErr2) {
+          data = { message: 'Server returned an invalid response format.' };
+        }
       }
 
       if (response.ok) {

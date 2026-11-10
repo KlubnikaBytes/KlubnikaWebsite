@@ -349,28 +349,42 @@ const ApplyPage = () => {
                 <p className="kb-apply-target-desc">{job.description}</p>
               )}
             </div>
-            {job && (
-              <div className="kb-apply-badge-right">
-                {job.type && (
-                  <span className="kb-job-meta-pill">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                    {job.type}
-                  </span>
-                )}
-                {job.location && (
-                  <span className="kb-job-meta-pill">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                      <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    {job.location}
-                  </span>
-                )}
-              </div>
-            )}
+            {job && (() => {
+              const workplace = job.workplaceType || (['On-site', 'Remote', 'Hybrid'].includes(job.location) ? job.location : 'On-site');
+              const cityLoc = job.workplaceType ? job.location : (!['On-site', 'Remote', 'Hybrid'].includes(job.location) ? job.location : '');
+
+              return (
+                <div className="kb-apply-badge-right">
+                  {job.type && (
+                    <span className="kb-job-meta-pill">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                      {job.type}
+                    </span>
+                  )}
+                  {workplace && (
+                    <span className="kb-job-meta-pill">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"></path>
+                        <rect x="1" y="21" width="22" height="2"></rect>
+                      </svg>
+                      {workplace}
+                    </span>
+                  )}
+                  {cityLoc && (
+                    <span className="kb-job-meta-pill">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      {cityLoc}
+                    </span>
+                  )}
+                </div>
+              );
+            })()}
           </div>
 
           <div className="kb-apply-form-card">

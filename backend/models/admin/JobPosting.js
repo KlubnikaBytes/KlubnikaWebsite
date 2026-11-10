@@ -9,9 +9,13 @@ const jobPostingSchema = new mongoose.Schema({
         type: String, // e.g., "Full-time", "Internship"
         required: true
     },
+    workplaceType: {
+        type: String, // "On-site", "Remote", "Hybrid"
+        default: 'On-site'
+    },
     location: {
-        type: String, // e.g., "On-site", "Remote"
-        required: true
+        type: String, // e.g., "Kolkata, India", "Dubai, UAE"
+        default: ''
     },
     description: {
         type: String,

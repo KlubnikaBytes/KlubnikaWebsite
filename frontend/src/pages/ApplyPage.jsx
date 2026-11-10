@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { apiUrl } from '../config/api';
 import './ApplyPage.css';
 
 const countryCodes = [
@@ -80,7 +81,7 @@ const ApplyPage = () => {
           setJobLoading(false);
           return;
         }
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/jobs/${jobId}`);
+        const res = await fetch(apiUrl(`/api/jobs/${jobId}`));
         if (res.ok) {
           const data = await res.json();
           setJob(data);
@@ -255,7 +256,7 @@ const ApplyPage = () => {
         headers['Authorization'] = `Bearer ${token}`;
       }
 
-      let response = await fetch(`${import.meta.env.VITE_API_URL}/api/applications`, {
+      let response = await fetch(apiUrl('/api/applications'), {
         method: 'POST',
         headers,
         body: submitData
@@ -266,7 +267,7 @@ const ApplyPage = () => {
       // If backend rejects due to a stale/invalid token in localStorage, auto-retry cleanly without headers
       if (!response.ok && (response.status === 401 || data.message?.toLowerCase().includes('token'))) {
         localStorage.removeItem('token');
-        response = await fetch(`${import.meta.env.VITE_API_URL}/api/applications`, {
+        response = await fetch(apiUrl('/api/applications'), {
           method: 'POST',
           body: submitData
         });

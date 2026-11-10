@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../../../config/api';
 
 const AdminLogin = () => {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ const AdminLogin = () => {
             // For better UX, we could have a checkbox, but let's assume if it looks like a long hex, or we just try token login first
             const isTokenLogin = passwordOrToken.length > 20 && !passwordOrToken.includes(' ');
 
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/auth/login`, {
+            const response = await fetch(apiUrl('/api/admin/auth/login'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -83,7 +84,7 @@ const AdminLogin = () => {
         setError('');
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/auth/verify-otp`, {
+            const response = await fetch(apiUrl('/api/admin/auth/verify-otp'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ employeeId, otpCode })
@@ -118,7 +119,7 @@ const AdminLogin = () => {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/auth/setup-password`, {
+            const response = await fetch(apiUrl('/api/admin/auth/setup-password'), {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -156,7 +157,7 @@ const AdminLogin = () => {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/auth/change-initial-password`, {
+            const response = await fetch(apiUrl('/api/admin/auth/change-initial-password'), {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -185,7 +186,7 @@ const AdminLogin = () => {
         setLoading(true);
         setError('');
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/auth/forgot-password`, {
+            const response = await fetch(apiUrl('/api/admin/auth/forgot-password'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ employeeId })
@@ -213,7 +214,7 @@ const AdminLogin = () => {
             setLoading(false); return;
         }
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/auth/reset-password`, {
+            const response = await fetch(apiUrl('/api/admin/auth/reset-password'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ employeeId, otpCode, newPassword })

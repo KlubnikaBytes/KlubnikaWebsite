@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { apiUrl } from '../config/api';
 import './Auth.css';
 
 const SignupPage = () => {
@@ -32,7 +33,7 @@ const SignupPage = () => {
             return;
         }
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+            const res = await fetch(apiUrl('/api/auth/register'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: formData.name, email: formData.email, password: formData.password })
@@ -53,7 +54,7 @@ const SignupPage = () => {
         e.preventDefault();
         setError(null);
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify-otp`, {
+            const res = await fetch(apiUrl('/api/auth/verify-otp'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: formData.email, otp: formData.otp })
@@ -75,7 +76,7 @@ const SignupPage = () => {
     const handleResendOtp = async () => {
         setError(null);
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/resend-otp`, {
+            const res = await fetch(apiUrl('/api/auth/resend-otp'), {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: formData.email })

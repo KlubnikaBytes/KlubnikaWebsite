@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import { apiUrl } from '../config/api';
 import './Footer.css';
 
 const Footer = () => {
@@ -16,8 +17,7 @@ const Footer = () => {
     setStatusMsg('');
 
     try {
-      const apiBase = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
-      const response = await fetch(`${apiBase}/api/newsletter`, {
+      const response = await fetch(apiUrl('/api/newsletter'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim() })

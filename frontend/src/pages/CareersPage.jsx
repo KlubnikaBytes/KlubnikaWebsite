@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SectionHeader from '../components/common/SectionHeader';
+import { apiUrl } from '../config/api';
 import './CareersPage.css';
 
 const CareersPage = () => {
@@ -11,7 +12,7 @@ const CareersPage = () => {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/jobs`);
+        const res = await fetch(apiUrl('/api/jobs'));
         if (!res.ok) throw new Error('Failed to fetch jobs');
         const data = await res.json();
         setJobs(data);

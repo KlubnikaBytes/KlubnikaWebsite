@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SectionHeader from '../components/common/SectionHeader';
 import PresenceMap from '../components/common/PresenceMap';
+import { apiUrl } from '../config/api';
 import './ContactPage.css';
 
 const countryCodes = [
@@ -75,7 +76,7 @@ const ContactPage = () => {
     const fullPhone = `${formData.countryCode} ${formData.phoneNumber}`.trim();
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+      const response = await fetch(apiUrl('/api/contact'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
